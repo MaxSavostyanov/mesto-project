@@ -1,0 +1,28 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 auto;
+  max-width: calc(880px + 2*19px);
+  padding: 45px 0 60px;
+  box-sizing: border-box;
+  font-family: 'Inter','Helvetica Neue', Arial, sans-serif;
+  text-rendering: optimizeLegibility;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /*
+  для прижатия footer к низу экрана.
+  для main задано свойство flex: 1;
+  */
+  min-height: 100vh;
+}
+
+@media screen and (max-width: 768px) {
+  .page {
+    padding-top: 28px;
+    padding-bottom: 36px;
+  }
+}

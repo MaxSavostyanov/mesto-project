@@ -1,0 +1,11 @@
+.main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  /*
+  для прижатия footer к низу экрана.
+  для page задано свойство min-height: 100vh;
+  */
+  flex: 1;
+}

@@ -1,0 +1,13 @@
+.profile__btn {
+  flex-shrink: 0;
+  padding: 0;
+  background-color: transparent;
+  background-repeat: no-repeat;
+  background-position: center;
+  transition: opacity .35s ease-out;
+}
+
+.profile__btn:hover {
+  opacity: .6;
+  cursor: pointer;
+}
