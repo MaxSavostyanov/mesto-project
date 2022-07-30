@@ -8,4 +8,20 @@
   color: #000;
   border: none;
   border-bottom: 1px solid rgba(0, 0, 0, .2);
+  transition: border-color .35s ease-out;
+}
+
+/*
+На макете нет примера наведения и фокуса для полей ввода
+Поэтому сам из немного стилизовал
+*/
+
+.popup__input:hover {
+  border-color: rgba(0, 0, 0, .6);
+}
+
+.popup__input:focus {
+  outline: none;
+  font-weight: 500;
+  border-color: rgba(0, 0, 0, 1);
 }
