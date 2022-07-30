@@ -12,5 +12,6 @@
   .profile__btn_type_add {
     width: 100%;
     max-width: 282px;
+    background-size: 16px 16px;
   }
 }
