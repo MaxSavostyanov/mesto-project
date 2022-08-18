@@ -32,56 +32,7 @@
       
       <section class='section cards'>
         <ul class='cards__list'>
-          <li class='card'>
-            <img src='https://images.unsplash.com/photo-1644317296443-cab90204e5e3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80' alt='Калязинская колокольня зимой' class='card__image'>
-            <div class='card__description'>
-              <h2 class='card__title' title='Калязинская колокольня'>Калязинская колокольня</h2>
-              <!--
-                Чтобы поставить like, вручную добавьте ему модификатор card__btn-like_actived
-              -->
-              <button class='card__btn-like' type='button' title='Поставить лайк'></button>
-            </div>
-          </li>
 
-          <li class='card'>
-            <img src='./images/karachay-cherkessia.jpg' alt='Карачаево-Черкесия' class='card__image'>
-            <div class='card__description'>
-              <h2 class='card__title' title='Карачаево-Черкесия'>Карачаево-Черкесия</h2>
-              <button class='card__btn-like' type='button' title='Поставить лайк'></button>
-            </div>
-          </li>
-
-          <li class='card'>
-            <img src='./images/dombay.jpg' alt='Домбай' class='card__image'>
-            <div class='card__description'>
-              <h2 class='card__title' title='Домбай'>Домбай</h2>
-              <button class='card__btn-like card__btn-like_actived' type='button' title='Снять лайк'></button>
-            </div>
-          </li>
-
-          <li class='card'>
-            <img src='https://images.unsplash.com/photo-1551845041-63e8e76836ea?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=689&q=80' alt='Озеро Байкал зимой' class='card__image'>
-            <div class='card__description'>
-              <h2 class='card__title' title='Байкал'>Байкал</h2>
-              <button class='card__btn-like' type='button' title='Поставить лайк'></button>
-            </div>
-          </li>
-
-          <li class='card'>
-            <img src='https://images.unsplash.com/photo-1556069749-287002c33fa6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1634&q=80' alt='Камчатка. Берег Тихого Океана.' class='card__image'>
-            <div class='card__description'>
-              <h2 class='card__title' title='Камчатка'>Камчатка</h2>
-              <button class='card__btn-like' type='button' title='Поставить лайк'></button>
-            </div>
-          </li>
-
-          <li class='card'>
-            <img src='https://images.unsplash.com/photo-1490879112094-281fea0883dc?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1169&q=80' alt='Остров Ольхон зимой' class='card__image'>
-            <div class='card__description'>
-              <h2 class='card__title' title='Остров Ольхон'>Остров Ольхон</h2>
-              <button class='card__btn-like' type='button' title='Поставить лайк'></button>
-            </div>
-          </li>
         </ul>
       </section>
     </main>
@@ -90,7 +41,6 @@
       <p class='footer__copyright'>&copy; 2022 Mesto Russia</p>
     </footer> 
 
-    <!--Чтобы открыть модальное окно popup, вручную добавьте ему модификатор popup_opened-->
     <div class='popup'>
       <div class='popup__container'>
         <button class='popup__btn popup__btn_type_close' type='button' title='Закрыть форму'></button>
@@ -103,5 +53,17 @@
       </div>
     </div>
   </div>
+
+  <template id="card-template">
+    <li class='card'>
+      <button class='card__btn-delete' type='button' title='Удалить'></button>
+      <img src='' alt='' class='card__image'>
+      <div class='card__description'>
+        <h2 class='card__title' title=''></h2>
+        <button class='card__btn-like' type='button' title='Поставить лайк'></button>
+      </div>
+    </li>
+  </template>
+  <script type='module' src="./scripts/script.js"></script>
 </body>
 </html>
