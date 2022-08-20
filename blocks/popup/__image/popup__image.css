@@ -1,0 +1,6 @@
+.popup__image {
+  display: block;
+  max-width: 65vw;
+  max-height: 65vh;
+  min-width: 282px;
+}
