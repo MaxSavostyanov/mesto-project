@@ -99,7 +99,6 @@ function openAddCard() {
 
 function addCard (evt) {
   evt.preventDefault();
-  console.log(linkImage);
   cardsList.prepend(createCard(nameImage.value, linkImage.value));
   closePopup();
 }

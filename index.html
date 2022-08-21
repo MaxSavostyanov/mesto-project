@@ -23,11 +23,11 @@
         <div class='profile__info'>
           <div class='profile__title'>
             <h1 class='profile__name' title='Жак-Ив Кусто'>Жак-Ив Кусто</h1>
-            <button type='button' class='profile__btn profile__btn_type_edit' title='Редактировать профиль' data-modal="edit"></button>
+            <button type='button' class='profile__btn profile__btn_type_edit' title='Редактировать профиль' data-modal='edit'></button>
           </div>          
           <p class='profile__about' title='Исследователь океана'>Исследователь океана</p>
         </div>
-        <button type='button' class='profile__btn profile__btn_type_add' title='Добавить фото' data-modal="add"></button>
+        <button type='button' class='profile__btn profile__btn_type_add' title='Добавить фото' data-modal='add'></button>
       </section>
       
       <section class='section cards'>
@@ -45,7 +45,7 @@
       <div class='popup__container'>
         <button class='popup__btn popup__btn_type_close' type='button' title='Закрыть'></button>
 
-        <div class="popup__content popup__content_type_form" id="edit-profile">
+        <div class='popup__content popup__content_type_form' id='edit-profile'>
           <h2 class='popup__heading'>Редактировать профиль</h2>
           <form class='popup__form' name='editProfile'>
             <input class='popup__input' type='text' name='username' placeholder='Имя' required>
@@ -54,7 +54,7 @@
           </form>
         </div>
 
-        <div class="popup__content popup__content_type_form" id="add-card">
+        <div class='popup__content popup__content_type_form' id='add-card'>
           <h2 class='popup__heading'>Новое место</h2>
           <form class='popup__form' name='addCard'>
             <input class='popup__input' type='text' name='name' placeholder='Название' required>
@@ -63,15 +63,15 @@
           </form>
         </div>
 
-        <figure class="popup__content popup__content_type_full-image" id="full-image">
-          <img src="" alt="" class="popup__image">
-          <figcaption class="popup__image-caption"></figcaption>
+        <figure class='popup__content popup__content_type_full-image' id='full-image'>
+          <img src='' alt='' class='popup__image'>
+          <figcaption class='popup__image-caption'></figcaption>
         </figure>
       </div>
     </div>
   </div>
 
-  <template id="card-template">
+  <template id='card-template'>
     <li class='card'>
       <button class='card__btn-delete' type='button' title='Удалить'></button>
       <img src='' alt='' class='card__image'>
@@ -82,6 +82,6 @@
     </li>
   </template>
   
-  <script type='module' src="./scripts/script.js"></script>
+  <script type='module' src='./scripts/script.js'></script>
 </body>
 </html>
