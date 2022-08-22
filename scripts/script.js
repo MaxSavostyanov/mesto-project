@@ -133,7 +133,7 @@ function handleFormEditProfile (evt) {
  * Функция открытия popup c формой добаления новой карточки
  */
 function openFormAddCard() {
-  formEditProfile.reset();
+  formAddCard.reset();
   openPopup(popupAddCard);
 }
 
