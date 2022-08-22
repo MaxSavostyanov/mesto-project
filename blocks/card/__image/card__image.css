@@ -14,3 +14,10 @@
   */
   filter: brightness(.85);
 }
+
+.card__image:hover {
+  /*
+  может тут лучше будет тогда использовать zoom-in, вместо poiner?
+  */
+  cursor: zoom-in;
+}
