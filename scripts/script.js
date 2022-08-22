@@ -14,14 +14,20 @@ const inputAbout = formEditProfile.elements.about;
 
 /*Элементы для добавления карточки*/
 const formAddCard = document.forms.addCard;
-const nameImage = formAddCard.elements.name;
-const linkImage = formAddCard.elements.link;
+const inputNameImage = formAddCard.elements.name;
+const inputLinkImage = formAddCard.elements.link;
 
-/*Кнопки открытия модальный окон*/
+/*Кнопки открытия модальных окон*/
 const btnEdit = document.querySelector('.profile__btn_type_edit');
 const btnAdd = document.querySelector('.profile__btn_type_add');
 const btnClosePopup = popup.querySelector('.popup__btn_type_close');
 
+/**
+ * Создание карточки
+ * @param {string} name - назнание изображения
+ * @param {string} link - ссылка на изображение
+ * @returns {object} cardElement - полностью собранная карточка
+ */
 function createCard (name, link) {
   const cardTemplate = document.querySelector('#card-template').content;
   const cardElement = cardTemplate.querySelector('.card').cloneNode(true);
@@ -42,31 +48,49 @@ function createCard (name, link) {
   return cardElement;
 }
 
+/**
+ * Рендер первоначальных карточек 
+ * @param {array} arrCards - массив объектов, содержащих информацию о изображение (название и ссылку)
+ */
 function renderInitialCards (arrCards) {
   arrCards.forEach((item) => cardsList.append(createCard(item.name, item.link)));
 }
 
+/**
+ * Функция переключения лайка
+ * @param {object} btnLike - DOM-элемент кнопки лайка
+ */
 function toggleLike(btnLike) {
   btnLike.classList.toggle('card__btn-like_actived');
   btnLike.title = btnLike.classList.contains('card__btn-like_actived') ?'Убрать лайк' : 'Поставить лайк';
 }
 
+/**
+ * Функции открытия popup
+ */
 function openPopup () {
   popup.classList.remove('popup_closed');
   popup.classList.add('popup_opened');
 }
 
+/**
+ * Функция закрытия popup
+ */
 function closePopup () {
   popup.classList.remove('popup_opened');
   popup.classList.add('popup_closed');
   setTimeout(() => popup.querySelectorAll('.popup__content').forEach(item => item.classList.remove('popup__content_active')), 500);
 }
 
+/**
+ * Функция открытия popup c картинкой
+ * @param {string} name - назнание изображения
+ * @param {string} link - ссылка на изображение
+ */
 function openFullImage(name, link) {
   const container = popup.querySelector('#full-image');
   const fullImage = container.querySelector('.popup__image');
   const caption = container.querySelector('.popup__image-caption');
-
   fullImage.src = link;
   fullImage.alt = name;
   caption.textContent = name;
@@ -75,6 +99,9 @@ function openFullImage(name, link) {
   openPopup();
 }
 
+/**
+ * Функция открытия popup c формой редактирования профиля
+ */
 function openEditProfile() {
   const container = popup.querySelector('#edit-profile');
   inputUsername.value = username.textContent;
@@ -83,13 +110,20 @@ function openEditProfile() {
   openPopup();
 }
 
-function editProfile (evt) {
+/**
+ * Функция обработчик формы редактирования карточки
+ * @param {object} evt - событие, произошедшее на странице
+ */
+function editProfileHandler (evt) {
   evt.preventDefault();
   username.textContent = inputUsername.value;
   about.textContent = inputAbout.value;
   closePopup();
 }
 
+/**
+ * Функция открытия popup c формой добаления новой карточки
+ */
 function openAddCard() {
   const container = popup.querySelector('#add-card');
   container.querySelector('.popup__form').reset();
@@ -97,16 +131,21 @@ function openAddCard() {
   openPopup();
 }
 
-function addCard (evt) {
+/**
+ * Функция обработчик формы добаления новой карточки
+ * @param {object} evt - событие, произошедшее на странице
+ */
+function addCardHandler (evt) {
   evt.preventDefault();
-  cardsList.prepend(createCard(nameImage.value, linkImage.value));
+  cardsList.prepend(createCard(inputNameImage.value, inputLinkImage.value));
   closePopup();
 }
 
+/*Добавление услушателей на кнопки*/
 btnEdit.addEventListener('click', openEditProfile);
 btnAdd.addEventListener('click', openAddCard);
-formEditProfile.addEventListener('submit', editProfile);
-formAddCard.addEventListener('submit', addCard);
+formEditProfile.addEventListener('submit', editProfileHandler);
+formAddCard.addEventListener('submit', addCardHandler);
 btnClosePopup.addEventListener('click', closePopup);
 
 renderInitialCards (initialCards);
