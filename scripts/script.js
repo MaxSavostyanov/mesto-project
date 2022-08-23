@@ -61,7 +61,7 @@ function createCard (card) {
  * @param {array} arrCards - массив объектов, содержащих информацию о изображение (название и ссылку)
  */
 function renderInitialCards (arrCards) {
-  arrCards.forEach((item) => cardsContainer.append(createCard(item)));
+  arrCards.forEach(item => cardsContainer.append(createCard(item)));
 }
 
 /**
