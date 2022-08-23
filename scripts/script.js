@@ -7,6 +7,7 @@ const cardsContainer = document.querySelector('.cards__list');
 const cardTemplate = document.querySelector('#card-template').content;
 
 /*Элементы для работы с popup*/
+const popupList = document.querySelectorAll('.popup');
 const popupEditProlile = document.querySelector('.popup_edit-profile');
 const popupAddCard = document.querySelector('.popup_add-card');
 const popupFullImage = document.querySelector('.popup_full-image');
@@ -30,13 +31,6 @@ const captionFullImage = popupFullImage.querySelector('.popup__image-caption');
 /*Кнопки открытия и закрытия модальных окон*/
 const btnEdit = document.querySelector('.profile__btn_type_edit');
 const btnAdd = document.querySelector('.profile__btn_type_add');
-/*
-надеюсь не сильно намудрил с названием
-я решил выбрать все кнопки закрытия popup
-=> через цикл на каждую повесить слушатель
-=> через event.target.closest('.popup) закрыть соответствующий popup
-*/
-const btnsClosePopupList = document.querySelectorAll('.popup__btn_type_close');
 
 /**
  * Создание карточки
@@ -81,6 +75,7 @@ function toggleLike(btnLike) {
 
 /**
  * Функции открытия popup
+ * @param {object} popup - DOM-элемент всплывающего окна
  */
 function openPopup (popup) {
   popup.classList.remove('popup_closed');
@@ -89,10 +84,9 @@ function openPopup (popup) {
 
 /**
  * Функция закрытия popup
- * @param {object} evt - событие, произошедшее на странице
+ * @param {object} popup - DOM-элемент всплывающего окна
  */
-function closePopup (evt) {
-  const popup = evt.target.closest('.popup');
+function closePopup (popup) {
   popup.classList.remove('popup_opened');
   popup.classList.add('popup_closed');
 }
@@ -126,7 +120,7 @@ function handleFormEditProfile (evt) {
   evt.preventDefault();
   username.textContent = inputUsername.value;
   about.textContent = inputAbout.value;
-  closePopup(evt);
+  closePopup(popupEditProlile);
 }
 
 /**
@@ -148,14 +142,23 @@ function handleFormAddCard (evt) {
     link: inputLinkImage.value,
   };
   cardsContainer.prepend(createCard(newCard));
-  closePopup(evt);
+  closePopup(popupAddCard);
 }
+
 
 /*Добавление услушателей на кнопки*/
 btnEdit.addEventListener('click', openFormEditProfile);
 btnAdd.addEventListener('click', openFormAddCard);
 formEditProfile.addEventListener('submit', handleFormEditProfile);
 formAddCard.addEventListener('submit', handleFormAddCard);
-btnsClosePopupList.forEach(item => item.addEventListener('click', closePopup));
+popupList.forEach(popup => popup.addEventListener('mousedown', evt => {
+  if (evt.target.classList.contains('popup') || evt.target.classList.contains('popup__btn_type_close')) {
+    closePopup(popup);
+  }
+
+  /*
+  if (!evt.target.closest('.popup__content')) closePopup(popup); 
+  */
+}));
 
 renderInitialCards (initialCards);
