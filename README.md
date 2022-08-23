@@ -37,7 +37,7 @@
 ---
 ### Требования к проекту
 
-Проект должен соответствовать [чек-листу](https://code.s3.yandex.net/web-developer/checklists-pdf/web-plus/checklist-3.pdf) и [стандарту Яндекс.Практиму по офорлению HTML и CSS кода](https://code.s3.yandex.net/web-developer/static/design-rules/index.html).
+Проект должен соответствовать [чек-листу](https://code.s3.yandex.net/web-developer/checklists-pdf/web-plus/checklist-4.pdf) и [стандарту Яндекс.Практиму по офорлению HTML и CSS кода](https://code.s3.yandex.net/web-developer/static/design-rules/index.html).
 
 ---
 ### Figma
