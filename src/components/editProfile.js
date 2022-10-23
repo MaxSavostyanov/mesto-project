@@ -7,20 +7,20 @@ import {
   inputAbout,
   username,
   about,
+  settingsValidation as settings,
 } from './variables';
 
 import { openPopup, closePopup } from './modal';
-import { hideAllInputError, options } from './validate';
+import { hideAllInputError } from './validate';
 
 /**
  * Функция открытия popup c формой редактирования профиля
  */
 function openFormEditProfile() {
-  hideAllInputError(formEditProfile, options);
+  hideAllInputError(formEditProfile, settings);
   inputUsername.value = username.textContent;
   inputAbout.value = about.textContent;
   openPopup(popupEditProlile);
-  formEditProfile.addEventListener('submit', handleFormEditProfile);
 }
 
 /**
@@ -32,7 +32,6 @@ function handleFormEditProfile(evt) {
   username.textContent = inputUsername.value;
   about.textContent = inputAbout.value;
   closePopup(popupEditProlile);
-  formEditProfile.removeEventListener('submit', handleFormEditProfile);
 }
 
-export { openFormEditProfile };
+export { openFormEditProfile, handleFormEditProfile };

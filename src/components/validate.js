@@ -1,25 +1,17 @@
 'use strict';
 
-const options = {
-  formSelector: '',
-  inputSelector: '',
-  submitButtonSelector: '',
-  inputErrorClass: '',
-  errorClass: ''
-};
-
 /**
  * Функция показа сообщения об ошибки
  * @param {object} formElement - DOM-элемент формы 
  * @param {object} inputElement - DOM-элемент поля ввода
  * @param {string} errorMessage - текст сообщения ошибки
  */
-function showInputError(formElement, inputElement, errorMessage) {
+function showInputError(formElement, inputElement, errorMessage, settings) {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
 
-  inputElement.classList.add(options.inputErrorClass);
+  inputElement.classList.add(settings.inputErrorClass);
   errorElement.textContent = errorMessage;
-  errorElement.classList.add(options.errorClass);
+  errorElement.classList.add(settings.errorClass);
 }
 
 /**
@@ -27,23 +19,23 @@ function showInputError(formElement, inputElement, errorMessage) {
  * @param {object} formElement - DOM-элемент формы 
  * @param {object} inputElement - DOM-элемент поля ввода
  */
-function hideInputError(formElement, inputElement) {
+function hideInputError(formElement, inputElement, settings) {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
 
-  inputElement.classList.remove(options.inputErrorClass);
+  inputElement.classList.remove(settings.inputErrorClass);
   errorElement.textContent = '';
-  errorElement.classList.remove(options.errorClass);
+  errorElement.classList.remove(settings.errorClass);
 }
 
 /**
  * Функция скытия сообщения всех ошибкок
  * @param {object} formElement - DOM-элемент формы 
  */
-function hideAllInputError(formElement, options) {
-  const inputList = Array.from(formElement.querySelectorAll(options.inputSelector));
+function hideAllInputError(formElement, settings) {
+  const inputList = Array.from(formElement.querySelectorAll(settings.inputSelector));
 
   inputList.forEach(inputElement => {
-    hideInputError(formElement, inputElement);
+    hideInputError(formElement, inputElement, settings);
   });
 }
 
@@ -52,7 +44,7 @@ function hideAllInputError(formElement, options) {
  * @param {object} formElement - DOM-элемент формы 
  * @param {object} inputElement - DOM-элемент поля ввода
  */
-function isValid(formElement, inputElement) {
+function isValid(formElement, inputElement, settings) {
   if (inputElement.validity.patternMismatch) {
     inputElement.setCustomValidity(inputElement.dataset.errorMessage);
   } else {
@@ -60,9 +52,9 @@ function isValid(formElement, inputElement) {
   }
 
   if (!inputElement.validity.valid) {
-    showInputError(formElement, inputElement, inputElement.validationMessage);
+    showInputError(formElement, inputElement, inputElement.validationMessage, settings);
   } else {
-    hideInputError(formElement, inputElement);
+    hideInputError(formElement, inputElement, settings);
   }
 }
 
@@ -95,13 +87,13 @@ function toggleButtonState(inputList, buttonElement) {
  * Функция установки слушателей на форму
  * @param {object} formElement - DOM-элемент формы
  */
-function setEventListeners(formElement) {
-  const inputList = Array.from(formElement.querySelectorAll(options.inputSelector));
-  const btnElement = formElement.querySelector(options.submitButtonSelector);
+function setEventListeners(formElement, settings) {
+  const inputList = Array.from(formElement.querySelectorAll(settings.inputSelector));
+  const btnElement = formElement.querySelector(settings.submitButtonSelector);
 
   inputList.forEach(inputElement => {
     inputElement.addEventListener('input', () => {
-      isValid(formElement, inputElement);
+      isValid(formElement, inputElement, settings);
       toggleButtonState(inputList, btnElement);
     });
   });
@@ -111,15 +103,11 @@ function setEventListeners(formElement) {
  * Функция ключения валидации форм на странице
  * @param {object} opts - объект с настройками 
  */
-function enableValidation(opts) {
-  for (let key in opts) {
-    options[key] = opts[key];
-  }
-
-  const formList = Array.from(document.querySelectorAll(options.formSelector));
+function enableValidation(settings) {
+  const formList = Array.from(document.querySelectorAll(settings.formSelector));
   formList.forEach(formElement => {
-    setEventListeners(formElement);
+    setEventListeners(formElement, settings);
   });
 }
 
-export { enableValidation, hideAllInputError, options };
+export { enableValidation, hideAllInputError};

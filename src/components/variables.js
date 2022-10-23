@@ -1,5 +1,14 @@
 'use strict';
 
+/*Настройки для валидации форм*/
+export const settingsValidation = {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__btn_type_submit',
+  inputErrorClass: 'popup__input_error',
+  errorClass: 'popup__error-message_visible'
+} 
+
 /*Элементы необхомые для создания и добавления карточки */
 export const cardsContainer = document.querySelector('.cards__list');
 export const cardTemplate = document.querySelector('#card-template').content;
