@@ -10,7 +10,7 @@
 ---
 ### О проекте
 
-Учебный проект курса «Веб-разработчик плюс» от Яндекс Практикума.
+Проект пятого учебного месяца **«Работа с макетом, адаптивная вёрстка, интерактивные элементы»** курса «Веб-разработчик плюс» от Яндекс Практикума.
 
 **Сервис Mesto Russia** - итерактивная страница, куда можно добавлять фотографии, удалять их и ставить лайки.
 
@@ -20,7 +20,8 @@
 - Просмотр изображения карточки;
 - Добавление новой карточки;
 - Удаление карточки;
-- Поставить/снять лайк.
+- Поставить/снять лайк;
+- Реализована валидация форм в модальных окнах.
 
 ---
 ### Технологии и инструменты
@@ -34,13 +35,16 @@
 - JavaScript
 - Git
 - Bash
+- Webpack
+- Babel
+- PostCSS
 ---
 ### Требования к проекту
 
-Проект должен соответствовать [чек-листу](https://code.s3.yandex.net/web-developer/checklists-pdf/web-plus/checklist-4.pdf) и [стандарту Яндекс.Практиму по офорлению HTML и CSS кода](https://code.s3.yandex.net/web-developer/static/design-rules/index.html).
+Проект должен соответствовать [чек-листу](https://code.s3.yandex.net/web-developer/checklists-pdf/web-plus/checklist-8.pdf) и [стандарту Яндекс.Практиму по офорлению HTML и CSS кода](https://code.s3.yandex.net/web-developer/static/design-rules/index.html).
 
 ---
 ### Figma
 
 * [Ссылка на макет в Figma](https://www.figma.com/file/2cn9N9jSkmxD84oJik7xL7/JavaScript.-Sprint-4?node-id=0%3A1)
-
+* [Ссылка на UI KIT модальных окон](https://www.figma.com/file/kRVLKwYG3d1HGLvh7JFWRT/JavaScript.-Sprint-6?node-id=0%3A1)

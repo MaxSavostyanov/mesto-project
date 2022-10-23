@@ -1,0 +1,11 @@
+.popup__error-message {
+  padding-top: 5px;
+  min-height: 30px;
+  visibility: hidden;
+  opacity: 0;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 15px;
+  color: #FF0000;
+  transition: visibility 0s linear .25s, opacity .25s ease-in;
+}
