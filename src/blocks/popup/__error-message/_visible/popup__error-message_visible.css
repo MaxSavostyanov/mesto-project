@@ -1,0 +1,5 @@
+.popup__error-message_visible {
+  opacity: 1;
+  visibility: visible;
+  transition: visibility 0s linear 0s, opacity .25s ease-in;
+}
