@@ -7,6 +7,7 @@ import {
   inputLinkImage,
   submitFormAddCard,
   cardsContainer,
+  settingsValidation as settings,
 } from './variables';
 
 import { openPopup, closePopup } from './modal';
@@ -18,10 +19,9 @@ import { hideAllInputError, options } from './validate';
  */
 function openFormAddCard() {
   submitFormAddCard.disabled = true;
-  hideAllInputError(formAddCard, options);
+  hideAllInputError(formAddCard, settings);
   formAddCard.reset();
   openPopup(popupAddCard);
-  formAddCard.addEventListener('submit', handleFormAddCard);
 }
 
 /**
@@ -36,7 +36,6 @@ function handleFormAddCard(evt) {
   };
   cardsContainer.prepend(createCard(newCard));
   closePopup(popupAddCard);
-  formAddCard.removeEventListener('submit', handleFormAddCard);
 }
 
-export { openFormAddCard };
+export { openFormAddCard, handleFormAddCard };
