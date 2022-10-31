@@ -43,12 +43,12 @@ function handleFormAddCard(evt, myID) {
   addCard(config, newCard, myID)
     .then(card => {
       cardsContainer.prepend(createCard(card, myID));
+      closePopup(popupAddCard);
     })
     .catch((err) => {
       console.log(err);
     })
     .finally(() => {
-      closePopup(popupAddCard);
       submitFormAddCard.textContent = 'Создать';
     });
 }

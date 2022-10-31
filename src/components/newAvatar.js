@@ -46,12 +46,12 @@ function handleFormNewAvatar(evt) {
   setNewAvatar(config, newAvatar)
     .then(user => {
       renderAvatar(user.avatar);
+      closePopup(popupNewAvatar);
     })
     .catch((err) => {
       console.log(err);
     })
     .finally(() => {
-      closePopup(popupNewAvatar);
       submitFormNewAvatar.textContent = 'Сохранить';
     });
 }

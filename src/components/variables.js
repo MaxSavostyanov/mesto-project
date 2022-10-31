@@ -32,6 +32,7 @@ export const aboutUser = document.querySelector('.profile__about');
 export const formEditProfile = document.forms.editProfile;
 export const inputUsername = formEditProfile.elements.username;
 export const inputAbout = formEditProfile.elements.about;
+export const submitFormEditProfile = formEditProfile.elements.submit;
 
 /*Элементы для редактирования аватара профиля*/
 export const avatar = document.querySelector('.profile__avatar');
