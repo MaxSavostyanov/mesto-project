@@ -25,7 +25,6 @@ function closePopup(popup) {
  * @param {object} evt - объект события event
  */
 function handleEscClose(evt) {
-  console.log(evt.key);
   if (evt.key === 'Escape') {
     closePopup(document.querySelector('.popup_opened'));
   };
