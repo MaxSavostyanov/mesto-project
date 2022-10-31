@@ -64,7 +64,6 @@ function isValid(formElement, inputElement, settings) {
  * @returns {boolean} true - форма содержит хотя бы одного невалидное поле ввода
  */
 function hasInvalidInput(inputList) {
-  console.log(typeof (inputList));
   return inputList.some(inputElement => {
     return !inputElement.validity.valid
   });

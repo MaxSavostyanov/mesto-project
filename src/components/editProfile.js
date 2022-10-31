@@ -6,12 +6,24 @@ import {
   inputUsername,
   inputAbout,
   username,
-  about,
+  aboutUser,
   settingsValidation as settings,
+  config
 } from './variables';
 
 import { openPopup, closePopup } from './modal';
 import { hideAllInputError } from './validate';
+import { editUser } from './api';
+
+/**
+ * Функция отрисовки информации о пользователе
+ * @param {string} name - имя пользователя
+ * @param {string} about - о пользователе
+ */
+function renderUserInfo(name, about) {
+  username.textContent = name;
+  aboutUser.textContent = about;
+}
 
 /**
  * Функция открытия popup c формой редактирования профиля
@@ -19,7 +31,7 @@ import { hideAllInputError } from './validate';
 function openFormEditProfile() {
   hideAllInputError(formEditProfile, settings);
   inputUsername.value = username.textContent;
-  inputAbout.value = about.textContent;
+  inputAbout.value = aboutUser.textContent;
   openPopup(popupEditProlile);
 }
 
@@ -29,9 +41,18 @@ function openFormEditProfile() {
  */
 function handleFormEditProfile(evt) {
   evt.preventDefault();
-  username.textContent = inputUsername.value;
-  about.textContent = inputAbout.value;
-  closePopup(popupEditProlile);
+  const btnSubmit = evt.target.querySelector('.popup__btn_type_submit');
+  btnSubmit.textContent = 'Cохранение...';
+
+  editUser(config, inputUsername.value, inputAbout.value)
+    .then(user => renderUserInfo(user.name, user.about))
+    .catch((err) => {
+      console.log(err);
+    })
+    .finally(() => {
+    closePopup(popupEditProlile);
+    btnSubmit.textContent = 'Cохранить';
+  });
 }
 
-export { openFormEditProfile, handleFormEditProfile };
+export { openFormEditProfile, handleFormEditProfile, renderUserInfo };
