@@ -5,6 +5,7 @@ import {
   formEditProfile,
   inputUsername,
   inputAbout,
+  submitFormEditProfile,
   username,
   aboutUser,
   settingsValidation as settings,
@@ -41,18 +42,20 @@ function openFormEditProfile() {
  */
 function handleFormEditProfile(evt) {
   evt.preventDefault();
-  const btnSubmit = evt.target.querySelector('.popup__btn_type_submit');
-  btnSubmit.textContent = 'Cохранение...';
+  submitFormEditProfile.textContent = 'Cохранение...';
+  //evt.submitter.textContent = 'Cохранение...';
 
   editUser(config, inputUsername.value, inputAbout.value)
-    .then(user => renderUserInfo(user.name, user.about))
+    .then(user => {
+      renderUserInfo(user.name, user.about);
+      closePopup(popupEditProlile);
+    })
     .catch((err) => {
       console.log(err);
     })
     .finally(() => {
-    closePopup(popupEditProlile);
-    btnSubmit.textContent = 'Cохранить';
-  });
+      submitFormEditProfile.textContent = 'Cохранить';
+    });
 }
 
 export { openFormEditProfile, handleFormEditProfile, renderUserInfo };
