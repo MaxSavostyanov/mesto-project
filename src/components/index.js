@@ -12,10 +12,7 @@ import {
   formNewAvatar,
   settingsValidation
 } from './variables';
-import {
-  getUser,
-  getInitialCards,
-} from './api';
+import Api from './Api';
 import { renderInitialCards } from './card';
 import { enableValidation } from './validate';
 import { closePopup } from './modal';
@@ -34,15 +31,16 @@ import {
   renderAvatar,
 } from './newAvatar';
 
+/*создание экземпляра класса*/
+const api = new Api(config);
 
 /**
  * Функция иницилизации приложения
- * @param {object} config - данные необходимые для работы с сервером 
  * @param {object} settingsValidation - настройки для валидации форм на странице
  */
-async function init(config, settingsValidation) {
+async function init(settingsValidation) {
   let user, myID, initialCards;
-  await Promise.all([getUser(config), getInitialCards(config)])
+  await Promise.all([api.getUser(), api.getInitialCards()])
     .then(([userData, cardsData]) => {
       user = userData;
       myID = user._id;
@@ -73,5 +71,5 @@ async function init(config, settingsValidation) {
   enableValidation(settingsValidation);
 }
 
-init(config, settingsValidation);
+init(settingsValidation);
 

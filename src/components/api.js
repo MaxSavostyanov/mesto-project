@@ -13,38 +13,6 @@ function checkResponse(res) {
   }
 }
 
-
-/**
- * Функция запроса информации о пользователе с сервера
- * @param {object} config - объект данными для работы с сервером
- * @returns 
- */
-export function getUser(config) {
-  return fetch(`${config.server}/users/me`, {
-    headers: {
-      authorization: config.token,
-      'Content-Type': 'application/json'
-    }
-  })
-    .then(res => checkResponse(res));
-}
-
-
-/**
- * Функция запроса начальных карточек с сервера
- * @param {object} config - объект данными для работы с сервером
- * @returns 
- */
-export function getInitialCards(config) {
-  return fetch(`${config.server}/cards`, {
-    headers: {
-      authorization: config.token,
-      'Content-Type': 'application/json'
-    }
-  })
-    .then(res => checkResponse(res));
-}
-
 /**
  * Функция отправки отредактированных данных пользователя на сервер
  * @param {object} config - объект данными для работы с сервером 
@@ -164,4 +132,63 @@ export function setNewAvatar(config, newAvatar) {
     body: JSON.stringify(newAvatar)
   })
     .then(res => checkResponse(res));
+}
+
+
+
+
+
+
+
+
+
+
+
+/**
+ * Класс Api
+ * @param {object} baseUrl - URL
+ * @param {object} headers - заголовки для запроса и токен
+ */
+export default class Api {
+  constructor({ baseUrl, headers}) {
+    this._baseUrl = baseUrl;
+    this._headers = headers;
+  }
+
+/**
+ * Метод проверки ответа от сервера на корректность
+ * @param {object} res  - ответ от сервера
+ * @returns 
+ */
+  _checkResponse(res) {
+    if (res.ok) {
+      return res.json();
+    } else {
+      return Promise.reject(`Ошибка: code ${res.status}`);
+    }
+  }
+
+/**
+ * Метод запроса информации о пользователе с сервера
+ * @param {object} this - объект данными для работы с сервером
+ * @returns 
+ */
+  getUser() {
+    return fetch(`${this._baseUrl}/users/me`, {
+      headers: this._headers
+    })
+    .then(this._checkResponse);
+  }
+
+/**
+ * Метод запроса начальных карточек с сервера
+ * @param {object} this - объект данными для работы с сервером
+ * @returns 
+ */
+  getInitialCards() {
+    return fetch(`${this._baseUrl}/cards`, {
+      headers: this._headers
+    })
+    .then(this._checkResponse);
+  }
 }

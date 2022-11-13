@@ -2,8 +2,11 @@
 
 /*Данные необходимые для работы с сервером*/
 export const config = {
-  server: 'https://nomoreparties.co/v1/plus-cohort-16',
-  token: '26e206db-fdaf-4832-831b-12af613bc48e'
+  baseUrl: 'https://nomoreparties.co/v1/plus-cohort-16',
+  headers: {
+    authorization: '26e206db-fdaf-4832-831b-12af613bc48e',
+    'Content-Type': 'application/json'
+  }
 };
 
 /*Настройки для валидации форм*/

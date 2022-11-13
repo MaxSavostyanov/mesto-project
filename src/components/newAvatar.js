@@ -11,7 +11,7 @@ import {
 } from './variables';
 import { openPopup, closePopup } from './modal';
 import { hideAllInputError } from './validate';
-import { setNewAvatar } from './api';
+import { setNewAvatar } from './Api';
 
 /**
  * Функция отрисовки аватара пользователя

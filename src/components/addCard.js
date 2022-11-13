@@ -14,7 +14,7 @@ import {
 import { openPopup, closePopup } from './modal';
 import { createCard } from './card';
 import { hideAllInputError } from './validate';
-import { addCard } from './api';
+import { addCard } from './Api';
 
 /**
  * Функция открытия popup c формой добаления новой карточки

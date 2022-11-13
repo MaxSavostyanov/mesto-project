@@ -10,7 +10,7 @@ import {
   deleteCard,
   getLiked,
   removeLiked,
-} from './api';
+} from './Api';
 
 /**
  * Создание карточки
@@ -56,8 +56,8 @@ function createCard(card, myID) {
  * @param {object} countLikes - DOM-элемент кол-ва лайков 
  * @param {function} toggleLike - функция переключения лайка 
  */
-function handleBtnLike(config, btnLike, countLikes, toggleLike){
-  if(!btnLike.classList.contains('card__btn-like_actived')){
+function handleBtnLike(config, btnLike, countLikes, toggleLike) {
+  if (!btnLike.classList.contains('card__btn-like_actived')) {
     getLiked(config, btnLike, countLikes, toggleLike);
   } else {
     removeLiked(config, btnLike, countLikes, toggleLike);

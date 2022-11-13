@@ -14,7 +14,7 @@ import {
 
 import { openPopup, closePopup } from './modal';
 import { hideAllInputError } from './validate';
-import { editUser } from './api';
+import { editUser } from './Api';
 
 /**
  * Функция отрисовки информации о пользователе
