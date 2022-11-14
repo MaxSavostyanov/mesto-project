@@ -7,11 +7,11 @@ import {
   inputAvatarLink,
   submitFormNewAvatar,
   settingsValidation as settings,
-  config
 } from './variables';
 import { openPopup, closePopup } from './modal';
 import { hideAllInputError } from './validate';
-import { setNewAvatar } from './Api';
+
+import { api } from './index'
 
 /**
  * Функция отрисовки аватара пользователя
@@ -43,7 +43,7 @@ function handleFormNewAvatar(evt) {
   evt.preventDefault();
   submitFormNewAvatar.textContent = 'Сохранение...';
 
-  setNewAvatar(config, newAvatar)
+  api.setNewAvatar(newAvatar)
     .then(user => {
       renderAvatar(user.avatar);
       closePopup(popupNewAvatar);

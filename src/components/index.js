@@ -31,8 +31,8 @@ import {
   renderAvatar,
 } from './newAvatar';
 
-/*создание экземпляра класса*/
-const api = new Api(config);
+/*Создание экземпляра класса*/
+export const api = new Api(config);
 
 /**
  * Функция иницилизации приложения

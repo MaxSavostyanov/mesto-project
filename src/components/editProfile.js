@@ -9,12 +9,12 @@ import {
   username,
   aboutUser,
   settingsValidation as settings,
-  config
 } from './variables';
 
 import { openPopup, closePopup } from './modal';
 import { hideAllInputError } from './validate';
-import { editUser } from './Api';
+
+import { api } from './index'
 
 /**
  * Функция отрисовки информации о пользователе
@@ -45,7 +45,7 @@ function handleFormEditProfile(evt) {
   submitFormEditProfile.textContent = 'Cохранение...';
   //evt.submitter.textContent = 'Cохранение...';
 
-  editUser(config, inputUsername.value, inputAbout.value)
+  api.editUser(inputUsername.value, inputAbout.value)
     .then(user => {
       renderUserInfo(user.name, user.about);
       closePopup(popupEditProlile);

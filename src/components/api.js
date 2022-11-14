@@ -1,150 +1,6 @@
 'use strict'
 
 /**
- * Функция проверки ответа от сервера на корректность
- * @param {object} res  - ответ от сервера
- * @returns 
- */
-function checkResponse(res) {
-  if (res.ok) {
-    return res.json();
-  } else {
-    return Promise.reject(`Ошибка: code ${res.status}`);
-  }
-}
-
-/**
- * Функция отправки отредактированных данных пользователя на сервер
- * @param {object} config - объект данными для работы с сервером 
- * @returns 
- */
-export function editUser(config, name, about) {
-  return fetch(`${config.server}/users/me`, {
-    method: 'PATCH',
-    headers: {
-      authorization: config.token,
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-      name: name,
-      about: about,
-    })
-  })
-    .then(res => checkResponse(res));
-}
-
-/**
- * Функция отправки новой карточки на сервер
- * @param {object} config - объект данными для работы с сервером 
- * @returns 
- */
-export function addCard(config, card) {
-  return fetch(`${config.server}/cards`, {
-    method: 'POST',
-    headers: {
-      authorization: config.token,
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(card)
-  })
-    .then(res => checkResponse(res));
-}
-
-/**
- * Функция отправки запроса на удаления карточки 
- * @param {object} config - объект данными для работы с сервером 
- * @returns 
- */
-export function deleteCard(config, id) {
-  return fetch(`${config.server}/cards/${id}`, {
-    method: 'DELETE',
-    headers: {
-      authorization: config.token,
-      'Content-Type': 'application/json'
-    }
-  })
-    .then(res => checkResponse(res));
-}
-
-/**
- * Функция отправки запроса на устновку лайка 
- * @param {object} config - объект данными для работы с сервером 
- * @param {object} btnLike - DOM-элемент кнопки лайка 
- * @param {object} countLikes - DOM-элемент кол-ва лайков 
- * @param {function} toggleLike - функция переключения лайка 
- * @returns 
- */
-export function getLiked(config, btnLike, countLikes, toggleLike) {
-  return fetch(`${config.server}/cards/likes/${btnLike.dataset.id}`, {
-    method: 'PUT',
-    headers: {
-      authorization: config.token,
-      'Content-Type': 'application/json'
-    }
-  })
-    .then(res => checkResponse(res))
-    .then((card) => {
-      toggleLike(btnLike, countLikes, card);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-}
-
-/**
- * Функция отправки запроса на удаление лайка 
- * @param {object} config - объект данными для работы с сервером 
- * @param {object} btnLike - DOM-элемент кнопки лайка 
- * @param {object} countLikes - DOM-элемент кол-ва лайков 
- * @param {function} toggleLike - функция переключения лайка 
- * @returns 
- */
-export function removeLiked(config, btnLike, countLikes, toggleLike) {
-  return fetch(`${config.server}/cards/likes/${btnLike.dataset.id}`, {
-    method: 'DELETE',
-    headers: {
-      authorization: config.token,
-      'Content-Type': 'application/json'
-    }
-  })
-    .then(res => checkResponse(res))
-    .then((card) => {
-      toggleLike(btnLike, countLikes, card);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-}
-
-/**
- * Функция отправки отредактированных данных пользователя на сервер
- * @param {object} config - объект данными для работы с сервером 
- * @param {object} newAvatar - объект содержащий ссылку на новый аватар пользователя
- * @returns 
- */
-export function setNewAvatar(config, newAvatar) {
-  return fetch(`${config.server}/users/me/avatar`, {
-    method: 'PATCH',
-    headers: {
-      authorization: config.token,
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(newAvatar)
-  })
-    .then(res => checkResponse(res));
-}
-
-
-
-
-
-
-
-
-
-
-
-/**
  * Класс Api
  * @param {object} baseUrl - URL
  * @param {object} headers - заголовки для запроса и токен
@@ -188,6 +44,91 @@ export default class Api {
   getInitialCards() {
     return fetch(`${this._baseUrl}/cards`, {
       headers: this._headers
+    })
+    .then(this._checkResponse);
+  }
+
+  /**
+ * Метод отправки отредактированных данных пользователя на сервер
+ * @param {object} this - объект данными для работы с сервером 
+ * @returns 
+ */
+  editUser(name, about) {
+    return fetch(`${this._baseUrl}/users/me`, {
+      method: 'PATCH',
+      headers: this._headers,
+      body: JSON.stringify({
+        name: name,
+        about: about,
+      })
+    })
+    .then(this._checkResponse);
+  }
+
+  /**
+ * Метод отправки новой карточки на сервер
+ * @param {object} this - объект данными для работы с сервером 
+ * @returns 
+ */
+  addCard(card) {
+    return fetch(`${this._baseUrl}/cards`, {
+      method: 'POST',
+      headers: this._headers,
+      body: JSON.stringify(card)
+    })
+    .then(this._checkResponse);
+  }
+
+  /**
+ * Метод отправки запроса на удаления карточки 
+ * @param {object} this - объект данными для работы с сервером 
+ * @returns 
+ */
+  deleteCard(cardId) {
+    return fetch(`${this._baseUrl}/cards/${cardId}`, {
+      method: 'DELETE',
+      headers: this._headers
+    })
+    .then(this._checkResponse);
+  }
+  
+  /**
+ * Метод отправки запроса на установку лайка 
+ * @param {object} this - объект данными для работы с сервером 
+ * @returns 
+ */
+  setLiked(cardId) {
+    return fetch(`${this._baseUrl}/cards/likes/${cardId}`, {
+      method: 'PUT',
+      headers: this._headers
+    })
+    .then(this._checkResponse);
+  }
+
+/**
+ * Метод отправки запроса на удаление лайка 
+ * @param {object} this - объект данными для работы с сервером 
+ * @returns 
+ */
+  removeLiked(cardId) {
+    return fetch(`${this._baseUrl}/cards/likes/${cardId}`, {
+      method: 'DELETE',
+      headers: this._headers
+    })
+    .then(this._checkResponse);
+  }
+
+/**
+ * Функция отправки отредактированных данных пользователя на сервер
+ * @param {object} this - объект данными для работы с сервером 
+ * @param {object} newAvatar - объект содержащий ссылку на новый аватар пользователя
+ * @returns 
+ */
+  setNewAvatar(newAvatar) {
+    return fetch(`${this._baseUrl}/users/me/avatar`, {
+      method: 'PATCH',
+      headers: this._headers,
+      body: JSON.stringify(newAvatar)
     })
     .then(this._checkResponse);
   }

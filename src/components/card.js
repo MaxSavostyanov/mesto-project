@@ -10,7 +10,7 @@ import {
   deleteCard,
   getLiked,
   removeLiked,
-} from './Api';
+} from './ApiOld';
 
 /**
  * Создание карточки

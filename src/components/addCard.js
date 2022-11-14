@@ -7,14 +7,13 @@ import {
   inputLinkImage,
   submitFormAddCard,
   cardsContainer,
-  settingsValidation as settings,
-  config,
+  settingsValidation as settings
 } from './variables';
 
 import { openPopup, closePopup } from './modal';
 import { createCard } from './card';
 import { hideAllInputError } from './validate';
-import { addCard } from './Api';
+import { api } from './index'
 
 /**
  * Функция открытия popup c формой добаления новой карточки
@@ -40,7 +39,7 @@ function handleFormAddCard(evt, myID) {
   evt.preventDefault();
   submitFormAddCard.textContent = 'Сохранение...';
 
-  addCard(config, newCard, myID)
+  api.addCard(newCard, myID)
     .then(card => {
       cardsContainer.prepend(createCard(card, myID));
       closePopup(popupAddCard);
