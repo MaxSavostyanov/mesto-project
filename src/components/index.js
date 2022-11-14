@@ -10,7 +10,8 @@ import {
   formEditProfile,
   formAddCard,
   formNewAvatar,
-  settingsValidation
+  settingsValidation,
+  cardTemplateSelector
 } from './variables';
 import Api from './Api';
 import { renderInitialCards } from './card';
