@@ -2,8 +2,8 @@
 
 import { openFullImage } from './openFullImage';
 import {
-  cardsContainer,
-  cardTemplate,
+  //cardsContainer,
+  //cardTemplate,
   config
 } from './variables';
 import {

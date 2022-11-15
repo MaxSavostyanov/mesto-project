@@ -11,10 +11,12 @@ import {
   formAddCard,
   formNewAvatar,
   settingsValidation,
-  cardTemplateSelector
+  cardTemplateSelector,
+  cardsContainerSelector
 } from './variables';
-import Api from './Api';
-import { renderInitialCards } from './card';
+import Api from './_Api';
+import Card from './_Card';
+import Section from './_Section';
 import { enableValidation } from './validate';
 import { closePopup } from './modal';
 import {
@@ -32,35 +34,54 @@ import {
   renderAvatar,
 } from './newAvatar';
 
-/*Создание экземпляра класса*/
-export const api = new Api(config);
+/*Создание экземпляров класса*/
+// !!! не забыть убрать экспорт
+export const api = new Api(config); 
+
+let user, userID, initialCards;
+
+function renderCard(card) {
+  const newCard = new Card(cardTemplateSelector, card, userID, api, handleCardClick);
+
+  return newCard.createCard();
+}
+
+function handleCardClick(link, name) {
+  //вызов метода open(link, name) экземпляра класса popupWithImage
+}
 
 /**
  * Функция иницилизации приложения
  * @param {object} settingsValidation - настройки для валидации форм на странице
  */
 async function init(settingsValidation) {
-  let user, myID, initialCards;
   await Promise.all([api.getUser(), api.getInitialCards()])
     .then(([userData, cardsData]) => {
       user = userData;
-      myID = user._id;
+      userID = user._id;
       initialCards = cardsData;
+      console.log(userID);
     })
     .catch((err) => {
       console.log(err);
     });
 
+  const cardsList = new Section({
+    items: initialCards,
+    renderer: (card) => renderCard(card)
+  }, cardsContainerSelector);
+
   renderUserInfo(user.name, user.about);
-  renderInitialCards(initialCards, myID);
   renderAvatar(user.avatar);
+  cardsList.renderItems();
+  
 
   btnEditProfile.addEventListener('click', openFormEditProfile);
   btnAddCard.addEventListener('click', openFormAddCard);
   btnNewAvatar.addEventListener('click', openFormNewAvatar);
 
   formEditProfile.addEventListener('submit', handleFormEditProfile);
-  formAddCard.addEventListener('submit', (evt) => handleFormAddCard(evt, myID));
+  formAddCard.addEventListener('submit', (evt) => handleFormAddCard(evt, userID));
   formNewAvatar.addEventListener('submit', handleFormNewAvatar);
 
   popupList.forEach(popup => popup.addEventListener('mousedown', evt => {

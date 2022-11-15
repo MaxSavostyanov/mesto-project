@@ -6,7 +6,6 @@ import {
   inputNameImage,
   inputLinkImage,
   submitFormAddCard,
-  cardsContainer,
   settingsValidation as settings
 } from './variables';
 

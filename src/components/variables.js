@@ -19,7 +19,7 @@ export const settingsValidation = {
 }
 
 /*Элементы необхомые для создания и добавления карточки */
-export const cardsContainer = document.querySelector('.cards__list');
+export const cardsContainerSelector = '.cards__list';
 export const cardTemplateSelector = '#card-template';
 
 /*Элементы для работы с popup*/

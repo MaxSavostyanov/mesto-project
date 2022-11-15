@@ -39,11 +39,11 @@ export default class Card {
    */
   createCard() {
     this._cardElement = this._getTemplate();
-    this._btnDeleteElement = cardElement.querySelector('.card__btn-delete');
-    this._btnLikeElement = cardElement.querySelector('.card__btn-like');
-    this._countLikesElement = cardElement.querySelector('.card__count-likes');
-    this._imageElement = cardElement.querySelector('.card__image');
-    this._titleElement = cardElement.querySelector('.card__title');
+    this._btnDeleteElement = this._cardElement.querySelector('.card__btn-delete');
+    this._btnLikeElement = this._cardElement.querySelector('.card__btn-like');
+    this._countLikesElement = this._cardElement.querySelector('.card__count-likes');
+    this._imageElement = this._cardElement.querySelector('.card__image');
+    this._titleElement = this._cardElement.querySelector('.card__title');
 
     this._imageElement.src = this._link;
     this._imageElement.alt = this._name;
@@ -83,8 +83,8 @@ export default class Card {
   _setLiked() {
     this._api.setLiked(this._cardID)
       .then((card) => {
-        this._likes = card.likes
-        _this._toggleLike()
+        this._likes = card.likes;
+        this._toggleLike();
       })
       .catch((err) => {
         console.log(err);
@@ -97,8 +97,8 @@ export default class Card {
   _removeLiked() {
     this._api.removeLiked(this._cardID)
       .then((card) => {
-        this._likes = card.likes
-        _this._toggleLike()
+        this._likes = card.likes;
+        this._toggleLike();
       })
       .catch((err) => {
         console.log(err);
