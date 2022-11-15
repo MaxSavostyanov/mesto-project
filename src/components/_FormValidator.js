@@ -24,6 +24,10 @@ export default class FormValidator {
     this._inputList.forEach(inputElement => this._hideInputError(inputElement));
   }
 
+  disabledButton() {
+    this._buttonElement.disabled = true;
+  }
+
   _isValid(inputElement) {
     if (!inputElement.validity.valid) {
       this._showInputError(inputElement);

@@ -17,7 +17,7 @@ import { api, addFormValidator } from './index'
  * Функция открытия popup c формой добаления новой карточки
  */
 function openFormAddCard() {
-  submitFormAddCard.disabled = true;
+  addFormValidator.disabledButton();
   addFormValidator.hideAllInputError();
   formAddCard.reset();
   openPopup(popupAddCard);

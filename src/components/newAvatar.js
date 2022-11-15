@@ -25,7 +25,7 @@ function renderAvatar(avatarLink) {
  * Функция открытия popup c формой изменения аватара пользователя
  */
 function openFormNewAvatar() {
-  submitFormNewAvatar.disabled = true;
+  avatarFormValidator.disabledButton();
   avatarFormValidator.hideAllInputError();
   formNewAvatar.reset();
   openPopup(popupNewAvatar);
