@@ -11,7 +11,7 @@ import {
 import { openPopup, closePopup } from './modal';
 import { hideAllInputError } from './validate';
 
-import { api } from './index'
+import { api, avatarFormValidator } from './index'
 
 /**
  * Функция отрисовки аватара пользователя
@@ -26,7 +26,7 @@ function renderAvatar(avatarLink) {
  */
 function openFormNewAvatar() {
   submitFormNewAvatar.disabled = true;
-  hideAllInputError(formNewAvatar, settings);
+  avatarFormValidator.hideAllInputError();
   formNewAvatar.reset();
   openPopup(popupNewAvatar);
 }

@@ -12,9 +12,8 @@ import {
 } from './variables';
 
 import { openPopup, closePopup } from './modal';
-import { hideAllInputError } from './validate';
 
-import { api } from './index'
+import { api, profileFormValidator } from './index'
 
 /**
  * Функция отрисовки информации о пользователе
@@ -30,7 +29,7 @@ function renderUserInfo(name, about) {
  * Функция открытия popup c формой редактирования профиля
  */
 function openFormEditProfile() {
-  hideAllInputError(formEditProfile, settings);
+  profileFormValidator.hideAllInputError();
   inputUsername.value = username.textContent;
   inputAbout.value = aboutUser.textContent;
   openPopup(popupEditProlile);

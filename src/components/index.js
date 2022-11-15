@@ -17,7 +17,7 @@ import {
 import Api from './_Api';
 import Card from './_Card';
 import Section from './_Section';
-import { enableValidation } from './validate';
+import FormValidator from './_FormValidator';
 import { closePopup } from './modal';
 import {
   openFormEditProfile,
@@ -37,6 +37,9 @@ import {
 /*Создание экземпляров класса*/
 // !!! не забыть убрать экспорт
 export const api = new Api(config); 
+export const profileFormValidator = new FormValidator(settingsValidation, formEditProfile);
+export const addFormValidator = new FormValidator(settingsValidation, formAddCard);
+export const avatarFormValidator = new FormValidator(settingsValidation, formNewAvatar);
 
 let user, userID, initialCards;
 
@@ -54,7 +57,7 @@ function handleCardClick(link, name) {
  * Функция иницилизации приложения
  * @param {object} settingsValidation - настройки для валидации форм на странице
  */
-async function init(settingsValidation) {
+async function init() {
   await Promise.all([api.getUser(), api.getInitialCards()])
     .then(([userData, cardsData]) => {
       user = userData;
@@ -84,14 +87,17 @@ async function init(settingsValidation) {
   formAddCard.addEventListener('submit', (evt) => handleFormAddCard(evt, userID));
   formNewAvatar.addEventListener('submit', handleFormNewAvatar);
 
+  profileFormValidator.enableValidation();
+  addFormValidator.enableValidation();
+  avatarFormValidator.enableValidation();
+
   popupList.forEach(popup => popup.addEventListener('mousedown', evt => {
     if (evt.target.classList.contains('popup') || evt.target.classList.contains('popup__btn_type_close')) {
       closePopup(popup);
     }
   }));
 
-  enableValidation(settingsValidation);
 }
 
-init(settingsValidation);
+init();
 

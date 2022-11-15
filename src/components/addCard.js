@@ -11,15 +11,14 @@ import {
 
 import { openPopup, closePopup } from './modal';
 import { createCard } from './card';
-import { hideAllInputError } from './validate';
-import { api } from './index'
+import { api, addFormValidator } from './index'
 
 /**
  * Функция открытия popup c формой добаления новой карточки
  */
 function openFormAddCard() {
   submitFormAddCard.disabled = true;
-  hideAllInputError(formAddCard, settings);
+  addFormValidator.hideAllInputError();
   formAddCard.reset();
   openPopup(popupAddCard);
 }
