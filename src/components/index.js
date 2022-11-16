@@ -20,6 +20,7 @@ import Profile from './_Profile';
 import Card from './_Card';
 import Section from './_Section';
 import FormValidator from './_FormValidator';
+import PopupWithImage from './_PopupWithImage';
 import { closePopup } from './modal';
 import {
   openFormEditProfile,
@@ -43,6 +44,7 @@ export const profile = new Profile(settingsProfile);
 export const profileFormValidator = new FormValidator(settingsValidation, formEditProfile);
 export const addFormValidator = new FormValidator(settingsValidation, formAddCard);
 export const avatarFormValidator = new FormValidator(settingsValidation, formNewAvatar);
+const popupImage = new PopupWithImage ('.popup_full-image');
 
 let user, userID, initialCards;
 
@@ -53,7 +55,7 @@ function renderCard(card) {
 }
 
 function handleCardClick(link, name) {
-  //вызов метода open(link, name) экземпляра класса popupWithImage
+  popupImage.open(link, name);
 }
 
 /**
