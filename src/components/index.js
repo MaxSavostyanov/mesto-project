@@ -3,7 +3,6 @@
 import '../pages/index.css';
 import {
   config,
-  popupList,
   btnEditProfile,
   btnAddCard,
   btnNewAvatar,
@@ -14,7 +13,6 @@ import {
   settingsProfile,
   cardTemplateSelector,
   cardsContainerSelector,
-  avatar
 } from './variables';
 import Api from './_Api';
 import Profile from './_Profile';
@@ -24,25 +22,17 @@ import FormValidator from './_FormValidator';
 import PopupWithImage from './_PopupWithImage';
 import PopupWithForm from './_PopupWithForm';
 import { closePopup } from './modal';
-import {
-  openFormEditProfile,
-  handleFormEditProfile,
-  //renderUserInfo,
-} from './editProfile';
-import {
-  openFormNewAvatar,
-  handleFormNewAvatar,
-  //renderAvatar,
-} from './newAvatar';
 
 /*Создание экземпляров класса*/
 // !!! не забыть убрать экспорт
-export const api = new Api(config);
-export const profile = new Profile(settingsProfile);
-export const profileFormValidator = new FormValidator(settingsValidation, formEditProfile);
-export const addFormValidator = new FormValidator(settingsValidation, formAddCard);
-export const avatarFormValidator = new FormValidator(settingsValidation, formNewAvatar);
+const api = new Api(config);
+const profile = new Profile(settingsProfile);
+const profileFormValidator = new FormValidator(settingsValidation, formEditProfile);
+const addFormValidator = new FormValidator(settingsValidation, formAddCard);
+const avatarFormValidator = new FormValidator(settingsValidation, formNewAvatar);
+
 const popupImage = new PopupWithImage('.popup_full-image');
+popupImage.setEventListeners();
 
 let user, userID, initialCards;
 
@@ -76,10 +66,36 @@ async function init() {
     renderer: (card) => renderCard(card)
   }, cardsContainerSelector);
 
+  const popupFormEditProfile = new PopupWithForm(
+    '.popup_edit-profile',
+    formEditProfile,
+    function handleSubmitForm(data) {
+      this.setTextButton('Сохранение...');
+
+      api.editUser(data)
+        .then(user => {
+          profile.setUserInfo(user);
+          this.close();
+        })
+        .catch((err) => {
+          console.log(err);
+        })
+        .finally(() => {
+          this.setTextButton('Сохранить');
+        });
+    }
+  );
+
+  popupFormEditProfile.setEventListeners();
+  btnEditProfile.addEventListener('click', () => {
+    profileFormValidator.hideAllInputError();
+    popupFormEditProfile.open(profile.getUserInfo());
+  });
+
   const popupFormAddCard = new PopupWithForm(
     '.popup_add-card',
     formAddCard,
-    function handleSubmitForm (data) {
+    function handleSubmitForm(data) {
       this.setTextButton('Сохранение...');
 
       api.addCard(data)
@@ -96,13 +112,18 @@ async function init() {
     }
   );
 
-  const popupNewAvatar = new PopupWithForm(
+  popupFormAddCard.setEventListeners();
+  btnAddCard.addEventListener('click', () => {
+    addFormValidator.hideAllInputError();
+    popupFormAddCard.open()
+  });
+
+  const popupFormNewAvatar = new PopupWithForm(
     '.popup_new-avatar',
     formNewAvatar,
-    function handleSubmitForm (newvAvatar) {
+    function handleSubmitForm(data) {
       this.setTextButton('Сохранение...');
-
-      api.setNewAvatar(newvAvatar)
+      api.setNewAvatar(data)
         .then(user => {
           profile.setUserAvatar(user);
           this.close();
@@ -116,34 +137,18 @@ async function init() {
     }
   );
 
-  profile.renderProfile(user);
-  cardsList.renderItems();
-
-  btnEditProfile.addEventListener('click', openFormEditProfile);
-  btnAddCard.addEventListener('click', () => {
-    addFormValidator.hideAllInputError();
-    popupFormAddCard.open()
-  });
+  popupFormNewAvatar.setEventListeners();
   btnNewAvatar.addEventListener('click', () => {
     avatarFormValidator.hideAllInputError();
-    popupNewAvatar.open()
+    popupFormNewAvatar.open()
   });
 
-  formEditProfile.addEventListener('submit', handleFormEditProfile);
-
-  popupFormAddCard.setEventListeners();
-  popupNewAvatar.setEventListeners();
+  profile.renderProfile(user);
+  cardsList.renderItems();
 
   profileFormValidator.enableValidation();
   addFormValidator.enableValidation();
   avatarFormValidator.enableValidation();
-
-  popupList.forEach(popup => popup.addEventListener('mousedown', evt => {
-    if (evt.target.classList.contains('popup') || evt.target.classList.contains('popup__btn_type_close')) {
-      closePopup(popup);
-    }
-  }));
-
 }
 
 init();

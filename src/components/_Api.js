@@ -122,7 +122,6 @@ export default class Api {
  * @returns 
  */
   setNewAvatar(newAvatar) {
-    console.log(newAvatar);
     return fetch(`${this._baseUrl}/users/me/avatar`, {
       method: 'PATCH',
       headers: this._headers,
