@@ -18,6 +18,14 @@ export const settingsValidation = {
   errorClass: 'popup__error-message_visible'
 }
 
+/*Настройки для работы с профилем пользователя*/
+export const settingsProfile = {
+  nameSelector: '.profile__name',
+  aboutSelector: '.profile__about',
+  avatarSelector: '.profile__avatar'
+}
+
+
 /*Элементы необхомые для создания и добавления карточки */
 export const cardsContainerSelector = '.cards__list';
 export const cardTemplateSelector = '#card-template';

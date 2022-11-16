@@ -13,17 +13,19 @@ import {
 
 import { openPopup, closePopup } from './modal';
 
-import { api, profileFormValidator } from './index'
+import { api, profile, profileFormValidator } from './index'
 
 /**
  * Функция отрисовки информации о пользователе
  * @param {string} name - имя пользователя
  * @param {string} about - о пользователе
  */
+/*
 function renderUserInfo(name, about) {
   username.textContent = name;
   aboutUser.textContent = about;
 }
+*/
 
 /**
  * Функция открытия popup c формой редактирования профиля
@@ -46,7 +48,7 @@ function handleFormEditProfile(evt) {
 
   api.editUser(inputUsername.value, inputAbout.value)
     .then(user => {
-      renderUserInfo(user.name, user.about);
+      profile.renderProfile(user);
       closePopup(popupEditProlile);
     })
     .catch((err) => {
@@ -57,4 +59,8 @@ function handleFormEditProfile(evt) {
     });
 }
 
-export { openFormEditProfile, handleFormEditProfile, renderUserInfo };
+export { 
+  openFormEditProfile, 
+  handleFormEditProfile, 
+  //renderUserInfo
+ };

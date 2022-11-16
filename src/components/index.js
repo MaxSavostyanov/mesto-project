@@ -11,10 +11,12 @@ import {
   formAddCard,
   formNewAvatar,
   settingsValidation,
+  settingsProfile,
   cardTemplateSelector,
   cardsContainerSelector
 } from './variables';
 import Api from './_Api';
+import Profile from './_Profile';
 import Card from './_Card';
 import Section from './_Section';
 import FormValidator from './_FormValidator';
@@ -22,7 +24,7 @@ import { closePopup } from './modal';
 import {
   openFormEditProfile,
   handleFormEditProfile,
-  renderUserInfo,
+  //renderUserInfo,
 } from './editProfile';
 import {
   openFormAddCard,
@@ -31,12 +33,13 @@ import {
 import {
   openFormNewAvatar,
   handleFormNewAvatar,
-  renderAvatar,
+  //renderAvatar,
 } from './newAvatar';
 
 /*Создание экземпляров класса*/
 // !!! не забыть убрать экспорт
 export const api = new Api(config); 
+export const profile = new Profile(settingsProfile);
 export const profileFormValidator = new FormValidator(settingsValidation, formEditProfile);
 export const addFormValidator = new FormValidator(settingsValidation, formAddCard);
 export const avatarFormValidator = new FormValidator(settingsValidation, formNewAvatar);
@@ -74,10 +77,8 @@ async function init() {
     renderer: (card) => renderCard(card)
   }, cardsContainerSelector);
 
-  renderUserInfo(user.name, user.about);
-  renderAvatar(user.avatar);
+  profile.renderProfile(user);
   cardsList.renderItems();
-  
 
   btnEditProfile.addEventListener('click', openFormEditProfile);
   btnAddCard.addEventListener('click', openFormAddCard);

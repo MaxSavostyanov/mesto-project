@@ -11,15 +11,17 @@ import {
 import { openPopup, closePopup } from './modal';
 import { hideAllInputError } from './validate';
 
-import { api, avatarFormValidator } from './index'
+import { api, avatarFormValidator, profile } from './index'
 
 /**
  * Функция отрисовки аватара пользователя
  * @param {string} avatarLink - ссылка на аватар пользователя
  */
+/*
 function renderAvatar(avatarLink) {
   avatar.src = avatarLink;
 }
+*/
 
 /**
  * Функция открытия popup c формой изменения аватара пользователя
@@ -45,7 +47,7 @@ function handleFormNewAvatar(evt) {
 
   api.setNewAvatar(newAvatar)
     .then(user => {
-      renderAvatar(user.avatar);
+      profile.setUserAvatar(user);
       closePopup(popupNewAvatar);
     })
     .catch((err) => {
@@ -56,4 +58,8 @@ function handleFormNewAvatar(evt) {
     });
 }
 
-export { openFormNewAvatar, handleFormNewAvatar, renderAvatar };
+export {
+  openFormNewAvatar,
+  handleFormNewAvatar,
+  //renderAvatar 
+};
