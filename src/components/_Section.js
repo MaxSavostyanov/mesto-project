@@ -19,14 +19,13 @@ export default class Section {
    */
   addItem(item) {
     const itemElement = this._renderer(item);
-    this._containerElement.append(itemElement);
+    this._containerElement.prepend(itemElement);
   }
 
   /**
    * Отрисовать начальные элементы в контейнере
    */
   renderItems() {
-    console.log(this._renderer);
-    this._items.forEach(item => this.addItem(item));
+    this._items.reverse().forEach(item => this.addItem(item));
   }
 }
