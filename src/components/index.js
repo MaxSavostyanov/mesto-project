@@ -75,16 +75,40 @@ async function init() {
     renderer: (card) => renderCard(card)
   }, cardsContainerSelector);
 
+  const popupFormAddCard = new PopupWithForm(
+    '.popup_add-card',
+    formAddCard,
+    function handleSubmitForm (data) {
+      this.setTextButton('Сохранение...');
+
+      api.addCard(data)
+        .then(card => {
+          cardsList.addItem(card);
+          this.close();
+        })
+        .catch((err) => {
+          console.log(err);
+        })
+        .finally(() => {
+          this.setTextButton('Создать');
+        });
+    }
+  );
+
   profile.renderProfile(user);
   cardsList.renderItems();
 
   btnEditProfile.addEventListener('click', openFormEditProfile);
-  btnAddCard.addEventListener('click', openFormAddCard);
+  btnAddCard.addEventListener('click', () => {
+    addFormValidator.hideAllInputError();
+    popupFormAddCard.open()
+  });
   btnNewAvatar.addEventListener('click', openFormNewAvatar);
 
   formEditProfile.addEventListener('submit', handleFormEditProfile);
-  formAddCard.addEventListener('submit', (evt) => handleFormAddCard(evt, userID));
   formNewAvatar.addEventListener('submit', handleFormNewAvatar);
+
+  popupFormAddCard.setEventListeners();
 
   profileFormValidator.enableValidation();
   addFormValidator.enableValidation();
