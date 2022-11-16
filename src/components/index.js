@@ -13,7 +13,8 @@ import {
   settingsValidation,
   settingsProfile,
   cardTemplateSelector,
-  cardsContainerSelector
+  cardsContainerSelector,
+  avatar
 } from './variables';
 import Api from './_Api';
 import Profile from './_Profile';
@@ -95,6 +96,26 @@ async function init() {
     }
   );
 
+  const popupNewAvatar = new PopupWithForm(
+    '.popup_new-avatar',
+    formNewAvatar,
+    function handleSubmitForm (newvAvatar) {
+      this.setTextButton('Сохранение...');
+
+      api.setNewAvatar(newvAvatar)
+        .then(user => {
+          profile.setUserAvatar(user);
+          this.close();
+        })
+        .catch((err) => {
+          console.log(err);
+        })
+        .finally(() => {
+          this.setTextButton('Сохранить');
+        });
+    }
+  );
+
   profile.renderProfile(user);
   cardsList.renderItems();
 
@@ -103,12 +124,15 @@ async function init() {
     addFormValidator.hideAllInputError();
     popupFormAddCard.open()
   });
-  btnNewAvatar.addEventListener('click', openFormNewAvatar);
+  btnNewAvatar.addEventListener('click', () => {
+    avatarFormValidator.hideAllInputError();
+    popupNewAvatar.open()
+  });
 
   formEditProfile.addEventListener('submit', handleFormEditProfile);
-  formNewAvatar.addEventListener('submit', handleFormNewAvatar);
 
   popupFormAddCard.setEventListeners();
+  popupNewAvatar.setEventListeners();
 
   profileFormValidator.enableValidation();
   addFormValidator.enableValidation();
