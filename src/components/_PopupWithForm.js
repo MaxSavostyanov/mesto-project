@@ -32,9 +32,15 @@ export default class PopupWithForm extends Popup {
     });
   }
 
-  close() {
-    super.close();
-    this._popupForm.reset();
+  open(data) {
+    if (data) {
+      this._setInputValues(data);
+      this._btnSubmitElement.disabled = false;
+    } else {
+      this._popupForm.reset();
+      this._btnSubmitElement.disabled = true;
+    }
+    super.open();
   }
 
   setTextButton(text) {
