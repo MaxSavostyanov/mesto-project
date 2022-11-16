@@ -53,14 +53,11 @@ export default class Api {
  * @param {object} this - объект данными для работы с сервером 
  * @returns 
  */
-  editUser(name, about) {
+  editUser(user) {
     return fetch(`${this._baseUrl}/users/me`, {
       method: 'PATCH',
       headers: this._headers,
-      body: JSON.stringify({
-        name: name,
-        about: about,
-      })
+      body: JSON.stringify(user)
     })
     .then(this._checkResponse);
   }
@@ -125,6 +122,7 @@ export default class Api {
  * @returns 
  */
   setNewAvatar(newAvatar) {
+    console.log(newAvatar);
     return fetch(`${this._baseUrl}/users/me/avatar`, {
       method: 'PATCH',
       headers: this._headers,
