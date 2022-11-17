@@ -14,17 +14,16 @@ import {
   cardTemplateSelector,
   cardsContainerSelector,
 } from './variables';
-import Api from './_Api';
-import Profile from './_Profile';
-import Card from './_Card';
-import Section from './_Section';
-import FormValidator from './_FormValidator';
-import PopupWithImage from './_PopupWithImage';
-import PopupWithForm from './_PopupWithForm';
-import { closePopup } from './modal';
+import Api from './Api';
+import Profile from './Profile';
+import Card from './Card';
+import Section from './Section';
+import FormValidator from './FormValidator';
+import PopupWithImage from './PopupWithImage';
+import PopupWithForm from './PopupWithForm';
 
 /*Создание экземпляров класса*/
-// !!! не забыть убрать экспорт
+
 const api = new Api(config);
 const profile = new Profile(settingsProfile);
 const profileFormValidator = new FormValidator(settingsValidation, formEditProfile);
