@@ -1,6 +1,5 @@
 'use strict';
 
-import popupWithImage from './PopupWithImage';
 
 /*Данные необходимые для работы с сервером*/
 export const config = {
@@ -35,12 +34,24 @@ const settingsPopup = {
 }
 
 export const settingsPopups = {
-  withImage: {
-    common: settingsPopup,
-    popupSelector: '.popup_full-image',
-    imageSelector: '.popup__image',
-    captionSelector: '.popup__image-caption'
+  getWithImage: (popupSelector) => {
+    return {
+      common: settingsPopup,
+      popupSelector: popupSelector,
+      imageSelector: '.popup__image',
+      captionSelector: '.popup__image-caption'
+    }
+  },
+
+  getWithForm: (popupSelector) => {
+    return {
+      common: settingsPopup,
+      popupSelector: popupSelector,
+      inputSelector: '.popup__input',
+      btsSubmitSeletor: '.popup__btn_type_submit'
+    }
   }
+
 }
 
 /*Элементы необхомые для создания и добавления карточки */

@@ -7,12 +7,12 @@ export default class PopupWithForm extends Popup {
    * @param {object} popupForm - DOM-элемент формы
    * @param {function} handleSubmitForm - функция обработчик формы
    */
-  constructor(popupSelector, popupForm, handleSubmitForm) {
-    super(popupSelector);
+  constructor({ common, popupSelector, inputSelector, btsSubmitSeletor }, popupForm, handleSubmitForm) {
+    super(common, popupSelector);
 
     this._popupForm = popupForm;
-    this._inputsList = Array.from(this._popupForm.querySelectorAll('.popup__input'));
-    this._btnSubmitElement = this._popupForm.querySelector('.popup__btn_type_submit');
+    this._inputsList = Array.from(this._popupForm.querySelectorAll(inputSelector));
+    this._btnSubmitElement = this._popupForm.querySelector(btsSubmitSeletor);
     this._handleSubmitForm = handleSubmitForm;
   }
 

@@ -35,10 +35,10 @@ const profileFormValidator = new FormValidator(settingsValidation, formEditProfi
 const addFormValidator = new FormValidator(settingsValidation, formAddCard);
 const avatarFormValidator = new FormValidator(settingsValidation, formNewAvatar);
 
-const popupImage = new PopupWithImage(settingsPopups.withImage);
-/*
+const popupImage = new PopupWithImage(settingsPopups.getWithImage('.popup_full-image'));
+
 const popupFormEditProfile = new PopupWithForm(
-  '.popup_edit-profile',
+  settingsPopups.getWithForm('.popup_edit-profile'),
   formEditProfile,
   function handleSubmitForm(data) {
     this.setTextButton('Сохранение...');
@@ -58,7 +58,7 @@ const popupFormEditProfile = new PopupWithForm(
 );
 
 const popupFormAddCard = new PopupWithForm(
-  '.popup_add-card',
+  settingsPopups.getWithForm('.popup_add-card'),
   formAddCard,
   function handleSubmitForm(data) {
     this.setTextButton('Сохранение...');
@@ -78,7 +78,7 @@ const popupFormAddCard = new PopupWithForm(
 );
 
 const popupFormNewAvatar = new PopupWithForm(
-  '.popup_new-avatar',
+  settingsPopups.getWithForm('.popup_new-avatar'),
   formNewAvatar,
   function handleSubmitForm(data) {
     this.setTextButton('Сохранение...');
@@ -95,7 +95,7 @@ const popupFormNewAvatar = new PopupWithForm(
       });
   }
 );
-*/
+
 function renderCard(card, userID) {
   const newCard = new Card(cardTemplateSelector, card, userID, api, handleCardClick);
 
@@ -105,6 +105,8 @@ function renderCard(card, userID) {
 function handleCardClick(link, name) {
   popupImage.open(link, name);
 }
+
+
 
 //вынести все слушатели в отдельную функцию
 
@@ -125,7 +127,7 @@ async function init() {
 
   profile.renderProfile(user);
   cardsList.renderItems(initialCards, userID);
-    /*
+
   btnEditProfile.addEventListener('click', () => {
     profileFormValidator.hideAllInputError();
     popupFormEditProfile.open(profile.getUserInfo());
@@ -138,9 +140,9 @@ async function init() {
     avatarFormValidator.hideAllInputError();
     popupFormNewAvatar.open()
   });
-*/
+
   popupImage.setEventListeners();
-/*
+
   popupFormNewAvatar.setEventListeners();
   popupFormAddCard.setEventListeners();
   popupFormEditProfile.setEventListeners();
@@ -148,7 +150,7 @@ async function init() {
   profileFormValidator.enableValidation();
   addFormValidator.enableValidation();
   avatarFormValidator.enableValidation();
-  */
+
 }
 
 init();
