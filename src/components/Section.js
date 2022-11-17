@@ -4,8 +4,8 @@
 export default class Section {
   /**
    * Конструктор класса
-   * @param {*} param0 
-   * @param {*} renderer 
+   * @param {{ renderer: function }} param0 - функция создания элемента
+   * @param {string} selector - селектор контейнера, в который будут добавлятся элементы
    */
   constructor({ renderer }, selector) {
     this._containerElement = document.querySelector(selector);
@@ -14,7 +14,7 @@ export default class Section {
 
   /**
    * Добавить новый элемент в контейнер
-   * @param {*} item 
+   * @param {object} item - данные элемента, необходимые для его создания
    */
   addItem(item, userID) {
     const itemElement = this._renderer(item, userID);
@@ -23,6 +23,7 @@ export default class Section {
 
   /**
    * Отрисовать начальные элементы в контейнере
+   * @param {array} - массив данных начальных элементов
    */
   renderItems(items, userID) {
     items.reverse().forEach(item => this.addItem(item, userID));

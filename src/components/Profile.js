@@ -1,7 +1,11 @@
 export default class Profile {
   /**
    * @constructs
-   * @param {object} param0 - объект с селекторами элементов Профиля
+   * @param {{
+   *  nameSelector: string
+   *  aboutSelector: string
+   *  avatarSelector: string
+   * }} param0 - объект с селекторами элементов Профиля
    */
   constructor({ nameSelector, aboutSelector, avatarSelector }) {
     this._nameElement = document.querySelector(nameSelector);
@@ -19,7 +23,7 @@ export default class Profile {
       about: this._aboutElement.textContent,
     };
   }
-  
+
   /**
    * Отрисовать полученные данные пользователя
    * @param {object} data - данные пользователя
