@@ -11,6 +11,7 @@ import {
   formNewAvatar,
   settingsValidation,
   settingsProfile,
+  settingsPopups,
   cardTemplateSelector,
   cardsContainerSelector,
 } from './variables';
@@ -34,7 +35,8 @@ const profileFormValidator = new FormValidator(settingsValidation, formEditProfi
 const addFormValidator = new FormValidator(settingsValidation, formAddCard);
 const avatarFormValidator = new FormValidator(settingsValidation, formNewAvatar);
 
-const popupImage = new PopupWithImage('.popup_full-image');
+const popupImage = new PopupWithImage(settingsPopups.withImage);
+/*
 const popupFormEditProfile = new PopupWithForm(
   '.popup_edit-profile',
   formEditProfile,
@@ -93,7 +95,7 @@ const popupFormNewAvatar = new PopupWithForm(
       });
   }
 );
-
+*/
 function renderCard(card, userID) {
   const newCard = new Card(cardTemplateSelector, card, userID, api, handleCardClick);
 
@@ -123,7 +125,7 @@ async function init() {
 
   profile.renderProfile(user);
   cardsList.renderItems(initialCards, userID);
-
+    /*
   btnEditProfile.addEventListener('click', () => {
     profileFormValidator.hideAllInputError();
     popupFormEditProfile.open(profile.getUserInfo());
@@ -136,8 +138,9 @@ async function init() {
     avatarFormValidator.hideAllInputError();
     popupFormNewAvatar.open()
   });
-
+*/
   popupImage.setEventListeners();
+/*
   popupFormNewAvatar.setEventListeners();
   popupFormAddCard.setEventListeners();
   popupFormEditProfile.setEventListeners();
@@ -145,6 +148,7 @@ async function init() {
   profileFormValidator.enableValidation();
   addFormValidator.enableValidation();
   avatarFormValidator.enableValidation();
+  */
 }
 
 init();
