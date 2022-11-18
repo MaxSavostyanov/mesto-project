@@ -1,10 +1,13 @@
+'use strict'
+
 /**
  * Класс Popup
  */
 export default class Popup {
-    /**
+  /**
    * Конструктор класса
-   * @param {string} popupSelector - селектор попапа
+   * @param {object} param0 - общие настройки для работы с попапом
+   * @param {string} popupSelector - селектор текущего попапа
    */
   constructor({ popupClass, openedClass, closedClass, btnCloseClass }, popupSelector) {
     this._popup = document.querySelector(popupSelector);
@@ -15,7 +18,7 @@ export default class Popup {
     this._handleEscClose = this._handleEscClose.bind(this);
   }
 
-    /**
+  /**
    * Открывает попап
    */
   open() {
@@ -24,7 +27,7 @@ export default class Popup {
     document.addEventListener('keydown', this._handleEscClose);
   }
 
-    /**
+  /**
    * Закрывает попап
    */
   close() {
@@ -33,7 +36,7 @@ export default class Popup {
     document.removeEventListener('keydown', this._handleEscClose);
   }
 
-    /**
+  /**
    * Закрывает попап по кнопке 'Escape'
    */
   _handleEscClose(evt) {
@@ -42,7 +45,7 @@ export default class Popup {
     };
   }
 
-    /**
+  /**
    * Устанавливает слушатели на закрытие попапа по оверлею и крестику 
    */
   setEventListeners() {

@@ -1,9 +1,11 @@
+'use strict'
+
 import Popup from './Popup.js';
 
 export default class PopupWithForm extends Popup {
   /**
    * 
-   * @param {string} popupSelector - селектор попапа
+   * @param {object} param0 - настройки для работы с попапом
    * @param {object} popupForm - DOM-элемент формы
    * @param {function} handleSubmitForm - функция обработчик формы
    */

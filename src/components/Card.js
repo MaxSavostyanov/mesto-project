@@ -1,3 +1,5 @@
+'use strict'
+
 export default class Card {
   /**
    * @param {string} selector - селектор шаблока карточки

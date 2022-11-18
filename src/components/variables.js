@@ -1,7 +1,6 @@
 'use strict';
 
-
-/*Данные необходимые для работы с сервером*/
+/*Настройки для работы с сервером*/
 export const config = {
   baseUrl: 'https://nomoreparties.co/v1/plus-cohort-16',
   headers: {
@@ -26,6 +25,7 @@ export const settingsProfile = {
   avatarSelector: '.profile__avatar'
 }
 
+/*Настройки для работы с общим классом попапа*/
 const settingsPopup = {
   popupClass: 'popup',
   openedClass: 'popup_opened',
@@ -33,6 +33,7 @@ const settingsPopup = {
   btnCloseClass: 'popup__btn_type_close'
 }
 
+/*Настройки для работы с конкретными попапами*/
 export const settingsPopups = {
   getWithImage: (popupSelector) => {
     return {

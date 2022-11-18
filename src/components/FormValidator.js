@@ -1,3 +1,5 @@
+'use strict'
+
 /**
  * Класс отвечающий за валидацию форм
  */
@@ -16,7 +18,7 @@ export default class FormValidator {
 
   /**
    * Показ сообщение об ошибки
-   * @param {string} inputElement - DOM-элемент поля ввода
+   * @param {object} inputElement - DOM-элемент поля ввода
    */
   _showInputError(inputElement) {
     inputElement.classList.add(this._settings.inputErrorClass);
@@ -25,27 +27,27 @@ export default class FormValidator {
     this._errorElement.classList.add(this._settings.errorClass);
   }
 
-    /**
+  /**
    * Скрытие сообщения об ошибки
-   * @param {string} inputElement - DOM-элемент поля ввода
+   * @param {object} inputElement - DOM-элемент поля ввода
    */
   _hideInputError(inputElement) {
     inputElement.classList.remove(this._settings.inputErrorClass);
     this._errorElement = this._formElement.querySelector(`.${inputElement.id}-error`);
-    this._errorElement.textContent = ''; 
+    this._errorElement.textContent = '';
     this._errorElement.classList.remove(this._settings.errorClass);
   }
 
-    /**
+  /**
    * Скрытие сообщений всех ошибок
    */
   hideAllInputError() {
     this._inputList.forEach(inputElement => this._hideInputError(inputElement));
   }
 
-    /**
+  /**
    * Проверка валидности вводимых данных
-   * @param {string} inputElement - DOM-элемент поля ввода
+   * @param {object} inputElement - DOM-элемент поля ввода
    */
   _isValid(inputElement) {
     if (!inputElement.validity.valid) {
@@ -55,7 +57,7 @@ export default class FormValidator {
     }
   }
 
-    /**
+  /**
    * Проверка наличия в форме невалидного поля ввода
    */
   _hasInvalidInput() {
@@ -64,7 +66,7 @@ export default class FormValidator {
     });
   }
 
-    /**
+  /**
    * Включение/отключение кнопки submit
    */
   _toggleButtonState() {
@@ -75,7 +77,7 @@ export default class FormValidator {
     }
   }
 
-    /**
+  /**
    * Установка слушателей на форму
    */
   _setEventListeners() {
@@ -87,7 +89,7 @@ export default class FormValidator {
     });
   }
 
-    /**
+  /**
    * Включение валидации форм на странице
    */
   enableValidation() {
