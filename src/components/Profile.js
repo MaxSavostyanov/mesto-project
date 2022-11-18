@@ -32,7 +32,10 @@ export default class Profile {
    */
   setUserInfo(data) {
     this._nameElement.textContent = data.name;
+    this._nameElement.title = data.name;
+
     this._aboutElement.textContent = data.about;
+    this._aboutElement.title = data.about;
   }
 
   /**
