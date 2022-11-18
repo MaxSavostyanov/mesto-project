@@ -10,7 +10,7 @@
 ---
 ### О проекте
 
-Проект пятого учебного месяца **«Работа с макетом, адаптивная вёрстка, интерактивные элементы»** курса «Веб-разработчик плюс» от Яндекс Практикума.
+Проект шестого учебного месяца **«ООП-стиль написания кода. Контекст this»** курса «Веб-разработчик плюс» от Яндекс Практикума.
 
 **Сервис Mesto Russia** - итерактивная страница, куда можно добавлять фотографии, удалять их и ставить лайки.
 
@@ -41,7 +41,7 @@
 ---
 ### Требования к проекту
 
-Проект должен соответствовать [чек-листу](https://code.s3.yandex.net/web-developer/checklists-pdf/web-plus/checklist-9.pdf) и [стандарту Яндекс.Практиму по офорлению HTML и CSS кода](https://code.s3.yandex.net/web-developer/static/design-rules/index.html).
+Проект должен соответствовать [чек-листу](https://code.s3.yandex.net/web-developer/checklists-pdf/web-plus/checklist-10.pdf) и [стандарту Яндекс.Практиму по офорлению HTML и CSS кода](https://code.s3.yandex.net/web-developer/static/design-rules/index.html).
 
 ---
 ### Figma
