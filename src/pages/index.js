@@ -97,7 +97,7 @@ const popupFormNewAvatar = new PopupWithForm(
 );
 
 /*_____Переменные_____*/
-let user, userID, initialCards;
+let userID; 
 
 /*_____Функции_____*/
 /**
@@ -156,19 +156,17 @@ function enableValidation() {
 /**
  * Функция иницилизации приложения
  */
-async function init() {
-  await Promise.all([api.getUser(), api.getInitialCards()])
+function init() {
+  Promise.all([api.getUser(), api.getInitialCards()])
     .then(([userData, cardsData]) => {
-      user = userData;
-      userID = user._id;
-      initialCards = cardsData;
+      userID = userData._id;
+
+      profile.renderProfile(userData);
+      cardsList.renderItems(cardsData);
     })
     .catch((err) => {
       console.log(err);
     });
-
-  profile.renderProfile(user);
-  cardsList.renderItems(initialCards, userID);
 
   setEventListeners();
   enableValidation();
