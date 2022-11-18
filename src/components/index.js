@@ -23,7 +23,7 @@ import FormValidator from './FormValidator';
 import PopupWithImage from './PopupWithImage';
 import PopupWithForm from './PopupWithForm';
 
-/*Создание экземпляров класса*/
+/*_____Создание экземпляров класса_____*/
 const api = new Api(config);
 const profile = new Profile(settingsProfile);
 
@@ -96,48 +96,35 @@ const popupFormNewAvatar = new PopupWithForm(
   }
 );
 
-function renderCard(card, userID) {
+/*_____Переменные_____*/
+let user, userID, initialCards;
+
+/*_____Функции_____*/
+/**
+ * Функция создания элемента карточки
+ * @param {object} card - объект с данными создаваемой карточки
+ * @returns {object} - DOM-элемент карточки
+ */
+function renderCard(card) {
   const newCard = new Card(cardTemplateSelector, card, userID, api, handleCardClick);
 
   return newCard.createCard();
 }
 
+/**
+ * Функция обратчик нажатия на изображение
+ * @param {string} link - ссылка на изображение
+ * @param {string} name - название изображения
+ */
 function handleCardClick(link, name) {
   popupImage.open(link, name);
 }
 
 
-
-function setEventListeners() {
-  popupImage.setEventListeners();
-  popupFormNewAvatar.setEventListeners();
-  popupFormAddCard.setEventListeners();
-  popupFormEditProfile.setEventListeners();
-}
-function enableValidation() {
-  profileFormValidator.enableValidation();
-  addFormValidator.enableValidation();
-  avatarFormValidator.enableValidation();
-}
-
 /**
- * Функция иницилизации приложения
+ * Установка слушателей на интерактивные элементы и попапы
  */
-async function init() {
-  let user, userID, initialCards;
-  await Promise.all([api.getUser(), api.getInitialCards()])
-    .then(([userData, cardsData]) => {
-      user = userData;
-      userID = user._id;
-      initialCards = cardsData;
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-
-  profile.renderProfile(user);
-  cardsList.renderItems(initialCards, userID);
-
+function setEventListeners() {
   btnEditProfile.addEventListener('click', () => {
     profileFormValidator.hideAllInputError();
     popupFormEditProfile.open(profile.getUserInfo());
@@ -151,9 +138,40 @@ async function init() {
     popupFormNewAvatar.open()
   });
 
+  popupImage.setEventListeners();
+  popupFormNewAvatar.setEventListeners();
+  popupFormAddCard.setEventListeners();
+  popupFormEditProfile.setEventListeners();
+}
+
+/**
+ * Включение валидации форм
+ */
+function enableValidation() {
+  profileFormValidator.enableValidation();
+  addFormValidator.enableValidation();
+  avatarFormValidator.enableValidation();
+}
+
+/**
+ * Функция иницилизации приложения
+ */
+async function init() {
+  await Promise.all([api.getUser(), api.getInitialCards()])
+    .then(([userData, cardsData]) => {
+      user = userData;
+      userID = user._id;
+      initialCards = cardsData;
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+
+  profile.renderProfile(user);
+  cardsList.renderItems(initialCards, userID);
+
   setEventListeners();
   enableValidation();
-
 }
 
 init();
