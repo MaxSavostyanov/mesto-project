@@ -1,6 +1,6 @@
 'use strict';
 
-import '../pages/index.css';
+import './index.css';
 import {
   config,
   btnEditProfile,
@@ -14,14 +14,14 @@ import {
   settingsPopups,
   cardTemplateSelector,
   cardsContainerSelector,
-} from './variables';
-import Api from './Api';
-import Profile from './Profile';
-import Card from './Card';
-import Section from './Section';
-import FormValidator from './FormValidator';
-import PopupWithImage from './PopupWithImage';
-import PopupWithForm from './PopupWithForm';
+} from '../components/variables';
+import Api from '../components/Api';
+import Profile from '../components/Profile';
+import Card from '../components/Card';
+import Section from '../components/Section';
+import FormValidator from '../components/FormValidator';
+import PopupWithImage from '../components/PopupWithImage';
+import PopupWithForm from '../components/PopupWithForm';
 
 /*_____Создание экземпляров класса_____*/
 const api = new Api(config);
