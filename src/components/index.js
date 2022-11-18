@@ -108,7 +108,17 @@ function handleCardClick(link, name) {
 
 
 
-//вынести все слушатели в отдельную функцию
+function setEventListeners() {
+  popupImage.setEventListeners();
+  popupFormNewAvatar.setEventListeners();
+  popupFormAddCard.setEventListeners();
+  popupFormEditProfile.setEventListeners();
+}
+function enableValidation() {
+  profileFormValidator.enableValidation();
+  addFormValidator.enableValidation();
+  avatarFormValidator.enableValidation();
+}
 
 /**
  * Функция иницилизации приложения
@@ -141,15 +151,8 @@ async function init() {
     popupFormNewAvatar.open()
   });
 
-  popupImage.setEventListeners();
-
-  popupFormNewAvatar.setEventListeners();
-  popupFormAddCard.setEventListeners();
-  popupFormEditProfile.setEventListeners();
-
-  profileFormValidator.enableValidation();
-  addFormValidator.enableValidation();
-  avatarFormValidator.enableValidation();
+  setEventListeners();
+  enableValidation();
 
 }
 
