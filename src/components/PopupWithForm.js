@@ -9,13 +9,14 @@ export default class PopupWithForm extends Popup {
    * @param {object} popupForm - DOM-элемент формы
    * @param {function} handleSubmitForm - функция обработчик формы
    */
-  constructor({ common, popupSelector, inputSelector, btsSubmitSeletor }, popupForm, handleSubmitForm) {
+  constructor({ common, popupSelector, inputSelector, btsSubmitSeletor }, popupForm, handleSubmitForm, prepareForm) {
     super(common, popupSelector);
 
     this._popupForm = popupForm;
     this._inputsList = Array.from(this._popupForm.querySelectorAll(inputSelector));
     this._btnSubmitElement = this._popupForm.querySelector(btsSubmitSeletor);
     this._handleSubmitForm = handleSubmitForm;
+    this._prepareForm = prepareForm;
   }
 
   /**
@@ -55,14 +56,8 @@ export default class PopupWithForm extends Popup {
    * Отрыть попап с формой
    * @param {object|undefined } data - начальные данные для заполнения формы, если это необходимо
    */
-  open(data) {
-    if (data) {
-      this._setInputValues(data);
-      this._btnSubmitElement.disabled = false;
-    } else {
-      this._popupForm.reset();
-      this._btnSubmitElement.disabled = true;
-    }
+  open() {
+    this._prepareForm();
     super.open();
   }
 

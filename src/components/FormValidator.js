@@ -43,6 +43,7 @@ export default class FormValidator {
    */
   hideAllInputError() {
     this._inputList.forEach(inputElement => this._hideInputError(inputElement));
+    this._buttonElement.disabled = true;
   }
 
   /**
@@ -86,6 +87,16 @@ export default class FormValidator {
         this._isValid(inputElement);
         this._toggleButtonState();
       });
+    });
+  }
+
+  /**
+   * Проверить начальные значения полей
+   */
+  checkInitialInputValues() {
+    this._inputList.forEach(inputElement => {
+        this._isValid(inputElement);
+        this._toggleButtonState();
     });
   }
 

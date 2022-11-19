@@ -54,6 +54,10 @@ const popupFormEditProfile = new PopupWithForm(
       .finally(() => {
         this.setTextButton('Сохранить');
       });
+  },
+  function prepareForm() {
+    this._setInputValues(profile.getUserInfo());
+    profileFormValidator.checkInitialInputValues();
   }
 );
 
@@ -74,6 +78,10 @@ const popupFormAddCard = new PopupWithForm(
       .finally(() => {
         this.setTextButton('Создать');
       });
+  },
+  function prepareForm() {
+    formAddCard.reset();
+    addFormValidator.hideAllInputError();
   }
 );
 
@@ -93,11 +101,15 @@ const popupFormNewAvatar = new PopupWithForm(
       .finally(() => {
         this.setTextButton('Сохранить');
       });
+  },
+  function prepareForm() {
+    formNewAvatar.reset();
+    avatarFormValidator.hideAllInputError();
   }
 );
 
 /*_____Переменные_____*/
-let userID; 
+let userID;
 
 /*_____Функции_____*/
 /**
@@ -125,18 +137,9 @@ function handleCardClick(link, name) {
  * Установка слушателей на интерактивные элементы и попапы
  */
 function setEventListeners() {
-  btnEditProfile.addEventListener('click', () => {
-    profileFormValidator.hideAllInputError();
-    popupFormEditProfile.open(profile.getUserInfo());
-  });
-  btnAddCard.addEventListener('click', () => {
-    addFormValidator.hideAllInputError();
-    popupFormAddCard.open()
-  });
-  btnNewAvatar.addEventListener('click', () => {
-    avatarFormValidator.hideAllInputError();
-    popupFormNewAvatar.open()
-  });
+  btnEditProfile.addEventListener('click', () => popupFormEditProfile.open());
+  btnAddCard.addEventListener('click', () => popupFormAddCard.open());
+  btnNewAvatar.addEventListener('click', () => popupFormNewAvatar.open());
 
   popupImage.setEventListeners();
   popupFormNewAvatar.setEventListeners();
