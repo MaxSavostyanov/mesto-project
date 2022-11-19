@@ -118,7 +118,39 @@ let userID;
  * @returns {object} - DOM-элемент карточки
  */
 function renderCard(card) {
-  const newCard = new Card(cardTemplateSelector, card, userID, api, handleCardClick);
+  const newCard = new Card(cardTemplateSelector, card, userID, {
+    handleCardClick: () => {
+      handleCardClick(newCard.getImageData());
+    },
+    handleLike: () => {
+      if (newCard.isLiked()) {
+        api.removeLiked(newCard.getCardID())
+          .then((card) => {
+            newCard.updateLikes(card.likes);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      } else {
+        api.setLiked(newCard.getCardID())
+          .then((card) => {
+            newCard.updateLikes(card.likes);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      }
+    },
+    handleDelete: () => {
+      api.deleteCard(newCard.getCardID())
+        .then(() => {
+          newCard.deleteCard();
+        })
+        .catch((err) => {
+          console.log(err);
+        })
+    },
+  });
 
   return newCard.createCard();
 }
@@ -128,7 +160,7 @@ function renderCard(card) {
  * @param {string} link - ссылка на изображение
  * @param {string} name - название изображения
  */
-function handleCardClick(link, name) {
+function handleCardClick({ link, name }) {
   popupImage.open(link, name);
 }
 

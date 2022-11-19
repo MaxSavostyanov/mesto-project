@@ -8,7 +8,11 @@ export default class Card {
    * @param {object} api - объект класса Api
    * @param {function} handleCardClick - функция обработчик открытия попапа с картинкой
    */
-  constructor(selector, card, userID, api, handleCardClick) {
+  constructor(selector, card, userID, {
+    handleCardClick,
+    handleLike,
+    handleDelete
+  }) {
     this._selector = selector;
 
     this._link = card.link;
@@ -19,8 +23,9 @@ export default class Card {
     this._ownerCardID = card.owner._id;
     this._userID = userID;
 
-    this._api = api;
     this._handleCardClick = handleCardClick;
+    this._handleLike = handleLike;
+    this._handleDelete = handleDelete;
   }
 
   /**
@@ -68,6 +73,28 @@ export default class Card {
   }
 
   /**
+   * Получисть ID карточки
+   * @returns {string}
+   */
+  getCardID() {
+    return this._cardID;
+  }
+
+  /**
+   * Получить данные изображения
+   * @returns {{
+   *  link: string,
+   *  name: string,
+   * }}
+   */
+  getImageData() {
+    return {
+      link: this._link,
+      name: this._name
+    }
+  }
+
+  /**
    * Переключение лайка
    */
   _toggleLike() {
@@ -80,63 +107,37 @@ export default class Card {
   }
 
   /**
-   * Установка лайка
+   * Обновить лайки
    */
-  _setLiked() {
-    this._api.setLiked(this._cardID)
-      .then((card) => {
-        this._likes = card.likes;
-        this._toggleLike();
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+  updateLikes(likes) {
+    this._likes = likes;
+    this._toggleLike();
   }
 
   /**
-   * Удаление лайка
+   * Стоит ли лайк пользователя на карточку
+   * @returns {boolean}
    */
-  _removeLiked() {
-    this._api.removeLiked(this._cardID)
-      .then((card) => {
-        this._likes = card.likes;
-        this._toggleLike();
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+  isLiked() {
+    return this._btnLikeElement.classList.contains('card__btn-like_actived');
   }
 
   /**
-   * Обработчик кнопки лайка
+   * Удалить карточку
    */
-  _handleBtnLike() {
-    if (!this._btnLikeElement.classList.contains('card__btn-like_actived')) {
-      this._setLiked();
-    } else {
-      this._removeLiked();
-    }
-  }
-
-  /**
-   * Удаление карточки
-   */
-  _deleteCard() {
-    this._api.deleteCard(this._cardID)
-      .then(() => this._cardElement.remove())
-      .catch((err) => {
-        console.log(err);
-      })
+  deleteCard() {
+    this._cardElement.remove();
+    this._cardElement = null;
   }
 
   /**
    * Установка слушателей на интерактичные элементы карточки
    */
   _setEventListeners() {
-    this._imageElement.addEventListener('click', () => this._handleCardClick(this._link, this._name));
+    this._imageElement.addEventListener('click', () => this._handleCardClick());
 
-    this._btnDeleteElement.addEventListener('click', () => this._deleteCard());
+    this._btnDeleteElement.addEventListener('click', () => this._handleDelete());
 
-    this._btnLikeElement.addEventListener('click', () => this._handleBtnLike());
+    this._btnLikeElement.addEventListener('click', () => this._handleLike());
   }
 }
