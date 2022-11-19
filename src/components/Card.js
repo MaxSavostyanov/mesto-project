@@ -5,8 +5,7 @@ export default class Card {
    * @param {string} selector - селектор шаблока карточки
    * @param {object} card - данные создаваемой карточки
    * @param {string} userID - ID пользователя
-   * @param {object} api - объект класса Api
-   * @param {function} handleCardClick - функция обработчик открытия попапа с картинкой
+   * @param {object} param0 - набор обработчиков
    */
   constructor(selector, card, userID, {
     handleCardClick,
