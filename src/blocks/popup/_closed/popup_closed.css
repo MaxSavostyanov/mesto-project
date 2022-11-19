@@ -3,5 +3,5 @@
 */
 
 .popup_closed {
-  transition: visibility 0s linear .5s, opacity .5s ease-in;
+  transition: visibility 0s linear .5s, z-index 0s linear .5s, opacity .5s ease-in;
 }
