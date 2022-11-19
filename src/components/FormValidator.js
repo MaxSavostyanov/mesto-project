@@ -51,6 +51,11 @@ export default class FormValidator {
    * @param {object} inputElement - DOM-элемент поля ввода
    */
   _isValid(inputElement) {
+    if (inputElement.validity.patternMismatch) {
+      inputElement.setCustomValidity(inputElement.dataset.errorMessage);
+    } else {
+      inputElement.setCustomValidity('');
+    }
     if (!inputElement.validity.valid) {
       this._showInputError(inputElement);
     } else {
