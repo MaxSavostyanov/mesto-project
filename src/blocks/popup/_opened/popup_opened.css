@@ -1,5 +1,6 @@
 .popup_opened {
   visibility: visible;
+  z-index: 20;
   opacity: 1;
   transition: visibility 0s linear 0s, opacity .5s ease-in;
 }
