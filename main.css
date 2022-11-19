@@ -29,9 +29,9 @@
 .card__count-likes{color:#000;font-size:13px;font-weight:400;line-height:16px;margin:0;padding:0}
 .card__btn-like{background-color:transparent;background-image:url(c134b0d7ddd2297103fd.svg);background-position:50%;background-repeat:no-repeat;border:none;height:19px;padding:0;transition:opacity .35s ease-out;width:22px}.card__btn-like:hover{cursor:pointer;opacity:.5}
 .card__btn-like_actived{background-image:url(0947a12fe26f5819c74b.svg)}
-.popup{align-items:center;background-color:rgba(0,0,0,.5);display:flex;height:100vh;justify-content:center;left:0;opacity:0;position:fixed;top:0;visibility:hidden;width:100%;z-index:20}
-.popup_closed{transition:visibility 0s linear .5s,opacity .5s ease-in}
-.popup_opened{opacity:1;transition:visibility 0s linear 0s,opacity .5s ease-in;visibility:visible}
+.popup{align-items:center;background-color:rgba(0,0,0,.5);display:flex;height:100vh;justify-content:center;left:0;opacity:0;position:fixed;top:0;visibility:hidden;width:100%;z-index:-5}
+.popup_closed{transition:visibility 0s linear .5s,z-index 0s linear .5s,opacity .5s ease-in}
+.popup_opened{opacity:1;transition:visibility 0s linear 0s,opacity .5s ease-in;visibility:visible;z-index:20}
 .popup_full-image{background-color:rgba(0,0,0,.9)}
 .popup__container{box-shadow:0 0 25px rgba(0,0,0,.15);position:relative}
 .popup__btn{background-position:50%;background-repeat:no-repeat;background-size:contain;border:none;padding:0;transition:opacity .35s ease-out}.popup__btn:hover{cursor:pointer;opacity:.6}
