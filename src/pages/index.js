@@ -28,7 +28,7 @@ const api = new Api(config);
 const profile = new Profile(settingsProfile);
 
 const cardsList = new Section({
-  renderer: (card, userID) => renderCard(card, userID)
+  renderer: (card) => renderCard(card)
 }, cardsContainerSelector);
 
 const profileFormValidator = new FormValidator(settingsValidation, formEditProfile);
